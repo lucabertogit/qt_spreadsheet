@@ -10,6 +10,8 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6Widgets REQUIRED)
 
-add_executable(qt_spreadsheet main.cpp)
+add_executable(qt_spreadsheet main.cpp
+        Spreadsheet.h
+        Spreadsheet.cpp)
 
 target_link_libraries(qt_spreadsheet Qt6::Widgets)
