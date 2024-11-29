@@ -7,8 +7,7 @@
 #include "Spreadsheet.h"
 
 Spreadsheet::Spreadsheet(int rows, int cols, QWidget *parent) : QMainWindow(parent),
-    table(new QTableWidget(rows, cols, this))
-{
+                                                                table(new QTableWidget(rows, cols, this)) {
     table->setSizeAdjustPolicy(QTableWidget::AdjustToContents);
     for (int i = 0; i < cols; i++) {
         QString character(QChar('A' + i));
