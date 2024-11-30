@@ -12,6 +12,15 @@ find_package(Qt6Widgets REQUIRED)
 
 add_executable(qt_spreadsheet main.cpp
         Spreadsheet.h
-        Spreadsheet.cpp)
+        Spreadsheet.cpp
+        Function.h
+        Sum.h
+        Sum.cpp
+        Max.h
+        Max.cpp
+        Min.h
+        Min.cpp
+        Mean.h
+        Mean.cpp)
 
 target_link_libraries(qt_spreadsheet Qt6::Widgets)

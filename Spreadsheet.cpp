@@ -15,7 +15,6 @@ Spreadsheet::Spreadsheet(int rows, int cols, QWidget *parent) : QMainWindow(pare
     }
     table->setCurrentCell(0, 0);
     setCentralWidget(table);
-    connect(table, &QTableWidget::currentItemChanged, this, &Spreadsheet::currentItemChanged);
     connect(table, &QTableWidget::itemChanged, this, &Spreadsheet::itemChanged);
     setWindowTitle("Spreadsheet");
 }
@@ -24,10 +23,14 @@ Spreadsheet::~Spreadsheet() {
     delete table;
 }
 
-void Spreadsheet::currentItemChanged(QTableWidgetItem *item) {
-    std::cout << "Spreadsheet::currentItemChanged()" << std::endl;
+Function * Spreadsheet::createFunction(QTableWidgetItem *item) {
+    // TODO: implementare factory method
+    return nullptr;
 }
 
 void Spreadsheet::itemChanged(QTableWidgetItem *item) {
-    std::cout << "Spreadsheet::itemChanged()" << std::endl;
+    std::string cell = item->text().toStdString();
+    if (cell[0] == '=') {
+        observers.push_back(createFunction(item));
+    }
 }
