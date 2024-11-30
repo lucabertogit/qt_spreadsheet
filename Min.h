@@ -6,12 +6,15 @@
 #define MIN_H
 
 #include "Function.h"
+#include "Spreadsheet.h"
 
 class Min : public Function {
 public:
-    Min() = default;
+    Min(Spreadsheet *s);
     ~Min() override = default;
     void compute() override;
+private:
+    Spreadsheet *subject;
 };
 
 #endif //MIN_H

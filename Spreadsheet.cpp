@@ -25,6 +25,19 @@ Spreadsheet::~Spreadsheet() {
 
 Function * Spreadsheet::createFunction(QTableWidgetItem *item) {
     // TODO: implementare factory method
+    std::size_t found = item->text().toStdString().find("(");
+    if (found != std::string::npos) {
+        std::string codeFunction = item->text().toStdString().substr(1, found - 1);
+        if (codeFunction == "SUM") {
+            std::cout << "SUM" << std::endl;
+        } else if (codeFunction == "MAX") {
+            std::cout << "MAX" << std::endl;
+        } else if (codeFunction == "MIN") {
+            std::cout << "MIN" << std::endl;
+        } else if (codeFunction == "MEAN") {
+            std::cout << "MEAN" << std::endl;
+        }
+    }
     return nullptr;
 }
 

@@ -3,3 +3,9 @@
 //
 
 #include "Sum.h"
+
+Sum::Sum(Spreadsheet *s) : subject(s) {
+}
+
+void Sum::compute() {
+}

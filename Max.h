@@ -6,12 +6,15 @@
 #define MAX_H
 
 #include "Function.h"
+#include "Spreadsheet.h"
 
 class Max : public Function {
 public:
-    Max() = default;
+    Max(Spreadsheet *s);
     ~Max() override = default;
     void compute() override;
+private:
+    Spreadsheet *sunject;
 };
 
 #endif //MAX_H

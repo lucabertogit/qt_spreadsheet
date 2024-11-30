@@ -3,3 +3,9 @@
 //
 
 #include "Mean.h"
+
+Mean::Mean(Spreadsheet *s) : subject(s) {
+}
+
+void Mean::compute() {
+}

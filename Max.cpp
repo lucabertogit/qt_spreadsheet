@@ -3,3 +3,9 @@
 //
 
 #include "Max.h"
+
+Max::Max(Spreadsheet *s) : sunject(s) {
+}
+
+void Max::compute() {
+}

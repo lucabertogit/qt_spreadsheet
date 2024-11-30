@@ -3,3 +3,9 @@
 //
 
 #include "Min.h"
+
+Min::Min(Spreadsheet *s) : subject(s) {
+}
+
+void Min::compute() {
+}

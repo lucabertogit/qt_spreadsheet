@@ -6,12 +6,15 @@
 #define MEAN_H
 
 #include "Function.h"
+#include "Spreadsheet.h"
 
 class Mean : public Function {
 public:
-    Mean() = default;
+    Mean(Spreadsheet *s);
     ~Mean() override = default;
     void compute() override;
+private:
+    Spreadsheet *subject;
 };
 
 #endif //MEAN_H

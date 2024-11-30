@@ -6,12 +6,15 @@
 #define SUM_H
 
 #include "Function.h"
+#include "Spreadsheet.h"
 
 class Sum : public Function {
 public:
-    Sum() = default;
+    Sum(Spreadsheet *s);
     ~Sum() override = default;
     void compute() override;
+private:
+    Spreadsheet *subject;
 };
 
 #endif //SUM_H
