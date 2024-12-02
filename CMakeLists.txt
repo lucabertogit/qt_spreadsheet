@@ -21,6 +21,10 @@ add_executable(qt_spreadsheet main.cpp
         Min.h
         Min.cpp
         Mean.h
-        Mean.cpp)
+        Mean.cpp
+        Subject.h
+        Observer.h
+        Function.cpp
+)
 
 target_link_libraries(qt_spreadsheet Qt6::Widgets)

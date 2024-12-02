@@ -11,8 +11,11 @@
 class Min : public Function {
 public:
     Min(Spreadsheet *s);
+
     ~Min() override = default;
+
     void compute() override;
+
 private:
     Spreadsheet *subject;
 };

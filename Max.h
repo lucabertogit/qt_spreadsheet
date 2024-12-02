@@ -11,10 +11,13 @@
 class Max : public Function {
 public:
     Max(Spreadsheet *s);
+
     ~Max() override = default;
+
     void compute() override;
+
 private:
-    Spreadsheet *sunject;
+    Spreadsheet *subject;
 };
 
 #endif //MAX_H

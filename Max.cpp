@@ -4,7 +4,7 @@
 
 #include "Max.h"
 
-Max::Max(Spreadsheet *s) : sunject(s) {
+Max::Max(Spreadsheet *s) : subject(s) {
 }
 
 void Max::compute() {

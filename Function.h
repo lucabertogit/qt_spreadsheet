@@ -5,9 +5,14 @@
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
-class Function {
+#include "Observer.h"
+
+class Function : public Observer {
 public:
-    virtual ~Function() = default;
+    ~Function() override = default;
+
+    void update() override;
+
     virtual void compute() = 0;
 };
 

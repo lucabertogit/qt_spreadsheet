@@ -2,9 +2,13 @@
 // Created by lucaberto on 29/11/24.
 //
 
-#include <iostream>
+#include <string>
 
 #include "Spreadsheet.h"
+#include "Sum.h"
+#include "Max.h"
+#include "Min.h"
+#include "Mean.h"
 
 Spreadsheet::Spreadsheet(int rows, int cols, QWidget *parent) : QMainWindow(parent),
                                                                 table(new QTableWidget(rows, cols, this)) {
@@ -23,27 +27,42 @@ Spreadsheet::~Spreadsheet() {
     delete table;
 }
 
-Function * Spreadsheet::createFunction(QTableWidgetItem *item) {
-    // TODO: implementare factory method
+void Spreadsheet::createFunction(QTableWidgetItem *item) {
+    Function *function = nullptr;
     std::size_t found = item->text().toStdString().find("(");
     if (found != std::string::npos) {
         std::string codeFunction = item->text().toStdString().substr(1, found - 1);
         if (codeFunction == "SUM") {
-            std::cout << "SUM" << std::endl;
+            function = new Sum(this);
         } else if (codeFunction == "MAX") {
-            std::cout << "MAX" << std::endl;
+            function = new Max(this);
         } else if (codeFunction == "MIN") {
-            std::cout << "MIN" << std::endl;
+            function = new Min(this);
         } else if (codeFunction == "MEAN") {
-            std::cout << "MEAN" << std::endl;
+            function = new Mean(this);
         }
     }
-    return nullptr;
+    if (!function)
+        item->setText("#NOME?");
+}
+
+void Spreadsheet::addObserver(Observer *o) {
+    observers.push_back(o);
+}
+
+void Spreadsheet::removeObserver(Observer *o) {
+    observers.remove(o);
+}
+
+void Spreadsheet::notify() {
+    for (auto observer : observers)
+        observer->update();
 }
 
 void Spreadsheet::itemChanged(QTableWidgetItem *item) {
     std::string cell = item->text().toStdString();
     if (cell[0] == '=') {
-        observers.push_back(createFunction(item));
+        createFunction(item);
     }
+    notify();
 }

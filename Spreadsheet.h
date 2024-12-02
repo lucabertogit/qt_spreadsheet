@@ -12,22 +12,30 @@
 #include <QtWidgets/QTableWidgetItem>
 
 #include "Function.h"
+#include "Subject.h"
 
-class Spreadsheet : public QMainWindow {
+class Spreadsheet : public QMainWindow, public Subject {
     Q_OBJECT
 public:
     explicit Spreadsheet(int rows = 10, int cols = 10, QWidget *parent = nullptr);
 
     ~Spreadsheet() override;
 
-    Function *createFunction(QTableWidgetItem *item);
+    void createFunction(QTableWidgetItem *item);
+
+    void addObserver(Observer *o) override;
+
+    void removeObserver(Observer *o) override;
+
+    void notify() override;
 
 public slots:
     void itemChanged(QTableWidgetItem *item);
 
 private:
     QTableWidget *table;
-    std::list<Function*> observers;
+    // TODO: ricordarsi di liberare la memoria quando l'observer non serve più
+    std::list<Observer*> observers;
 };
 
 #endif //SPREADSHEET_H

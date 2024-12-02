@@ -11,8 +11,11 @@
 class Mean : public Function {
 public:
     Mean(Spreadsheet *s);
+
     ~Mean() override = default;
+
     void compute() override;
+
 private:
     Spreadsheet *subject;
 };

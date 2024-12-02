@@ -11,8 +11,11 @@
 class Sum : public Function {
 public:
     Sum(Spreadsheet *s);
+
     ~Sum() override = default;
+
     void compute() override;
+
 private:
     Spreadsheet *subject;
 };
