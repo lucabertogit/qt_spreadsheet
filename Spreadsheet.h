@@ -37,7 +37,7 @@ private:
 
     std::string getCodeFunction(const QTableWidgetItem *item);
 
-    std::string getRange(const QTableWidgetItem * item);
+    std::string getRange(const QTableWidgetItem *item);
 };
 
 #endif //SPREADSHEET_H

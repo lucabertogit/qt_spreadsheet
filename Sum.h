@@ -10,13 +10,17 @@
 
 class Sum : public Function {
 public:
-    Sum(Spreadsheet *s);
+    Sum(Spreadsheet *s, const std::string &range);
 
-    ~Sum() override = default;
+    ~Sum() override;
 
     void compute() override;
 
 private:
+    int firstColumn;
+    int lastColumn;
+    int firstRow;
+    int lastRow;
     Spreadsheet *subject;
 };
 
