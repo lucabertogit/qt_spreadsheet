@@ -10,7 +10,7 @@
 
 class Min : public Function {
 public:
-    Min(Spreadsheet *s);
+    Min(Spreadsheet *s, const std::string &range);
 
     ~Min() override = default;
 

@@ -21,8 +21,6 @@ public:
 
     ~Spreadsheet() override;
 
-    void createFunction(QTableWidgetItem *item);
-
     void addObserver(Observer *o) override;
 
     void removeObserver(Observer *o) override;
@@ -33,9 +31,13 @@ public slots:
     void itemChanged(QTableWidgetItem *item);
 
 private:
-    QTableWidget *table;
     // TODO: ricordarsi di liberare la memoria quando l'observer non serve più
+    QTableWidget *table;
     std::list<Observer*> observers;
+
+    std::string getCodeFunction(const QTableWidgetItem *item);
+
+    std::string getRange(const QTableWidgetItem * item);
 };
 
 #endif //SPREADSHEET_H

@@ -4,7 +4,7 @@
 
 #include "Max.h"
 
-Max::Max(Spreadsheet *s) : subject(s) {
+Max::Max(Spreadsheet *s, const std::string &range) : subject(s) {
 }
 
 void Max::compute() {

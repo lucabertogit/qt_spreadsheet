@@ -2,13 +2,11 @@
 // Created by lucaberto on 29/11/24.
 //
 
+#include <iostream> // TODO: togliere utilizzato per prove
 #include <string>
 
 #include "Spreadsheet.h"
-#include "Sum.h"
-#include "Max.h"
-#include "Min.h"
-#include "Mean.h"
+#include "FactoryFunction.h"
 
 Spreadsheet::Spreadsheet(int rows, int cols, QWidget *parent) : QMainWindow(parent),
                                                                 table(new QTableWidget(rows, cols, this)) {
@@ -27,23 +25,25 @@ Spreadsheet::~Spreadsheet() {
     delete table;
 }
 
-void Spreadsheet::createFunction(QTableWidgetItem *item) {
-    Function *function = nullptr;
-    std::size_t found = item->text().toStdString().find("(");
-    if (found != std::string::npos) {
-        std::string codeFunction = item->text().toStdString().substr(1, found - 1);
-        if (codeFunction == "SUM") {
-            function = new Sum(this);
-        } else if (codeFunction == "MAX") {
-            function = new Max(this);
-        } else if (codeFunction == "MIN") {
-            function = new Min(this);
-        } else if (codeFunction == "MEAN") {
-            function = new Mean(this);
-        }
+std::string Spreadsheet::getCodeFunction(const QTableWidgetItem *item) {
+    std::string codeFunction;
+    std::size_t startRange = item->text().toStdString().find("(");
+    if (startRange != std::string::npos) {
+        codeFunction = item->text().toStdString().substr(1, startRange - 1);
+        std::cout << "Code Function: " << codeFunction << std::endl; // TODO: togliere utilizzato per prove
     }
-    if (!function)
-        item->setText("#NOME?");
+    return codeFunction;
+}
+
+std::string Spreadsheet::getRange(const QTableWidgetItem *item) {
+    std::string range;
+    std::size_t startRange = item->text().toStdString().find("(");
+    std::size_t endRange = item->text().toStdString().find(")");
+    if (startRange != std::string::npos && endRange != std::string::npos) {
+        range = item->text().toStdString().substr(startRange + 1, endRange - startRange - 1);
+        std::cout << "Range: " << range << std::endl; // TODO: togliere utilizzato per prove
+    }
+    return range;
 }
 
 void Spreadsheet::addObserver(Observer *o) {
@@ -62,7 +62,12 @@ void Spreadsheet::notify() {
 void Spreadsheet::itemChanged(QTableWidgetItem *item) {
     std::string cell = item->text().toStdString();
     if (cell[0] == '=') {
-        createFunction(item);
+        FactoryFunction factory;
+        std::string codeFunction = getCodeFunction(item);
+        std::string range = getRange(item);
+        Function *function = factory.createFunction(this, codeFunction, range);
+        if (!function)
+            item->setText("#NOME?");
     }
     notify();
 }

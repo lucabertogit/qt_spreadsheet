@@ -25,6 +25,8 @@ add_executable(qt_spreadsheet main.cpp
         Subject.h
         Observer.h
         Function.cpp
+        FactoryFunction.h
+        FactoryFunction.cpp
 )
 
 target_link_libraries(qt_spreadsheet Qt6::Widgets)

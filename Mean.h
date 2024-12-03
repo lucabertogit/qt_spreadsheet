@@ -10,7 +10,7 @@
 
 class Mean : public Function {
 public:
-    Mean(Spreadsheet *s);
+    Mean(Spreadsheet *s, const std::string &range);
 
     ~Mean() override = default;
 

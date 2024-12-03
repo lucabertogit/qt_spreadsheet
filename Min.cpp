@@ -4,7 +4,7 @@
 
 #include "Min.h"
 
-Min::Min(Spreadsheet *s) : subject(s) {
+Min::Min(Spreadsheet *s, const std::string &range) : subject(s) {
 }
 
 void Min::compute() {

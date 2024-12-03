@@ -10,7 +10,7 @@
 
 class Max : public Function {
 public:
-    Max(Spreadsheet *s);
+    Max(Spreadsheet *s, const std::string &range);
 
     ~Max() override = default;
 
