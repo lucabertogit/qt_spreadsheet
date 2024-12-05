@@ -37,8 +37,8 @@ public slots:
 
 private:
     // TODO: ricordarsi di liberare la memoria quando l'observer non serve più
-    const int COLS {10};
-    const int ROWS {10};
+    const int COLS{10};
+    const int ROWS{10};
     QTableWidget *table;
     std::list<Observer*> observers;
 

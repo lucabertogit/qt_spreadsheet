@@ -8,6 +8,8 @@
 #include "Function.h"
 #include "Spreadsheet.h"
 
+class Spreadsheet;
+
 class Max : public Function {
 public:
     Max(Spreadsheet *s, const CellRange &r);

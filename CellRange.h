@@ -6,33 +6,53 @@
 #define CELLRANGE_H
 
 #include <string>
+#include <stdexcept>
 
-struct CellRange {
+class CellRange {
+public:
+    CellRange();
+
+    void setRange(const std::string &range);
+
+    int getStartColumn() const {
+        return startColumn;
+    }
+
+    void setStartColumn(int startColumn) {
+        this->startColumn = startColumn;
+    }
+
+    int getStartRow() const {
+        return startRow;
+    }
+
+    void setStartRow(int startRow) {
+        this->startRow = startRow;
+    }
+
+    int getEndColumn() const {
+        return endColumn;
+    }
+
+    void setEndColumn(int endColumn) {
+        this->endColumn = endColumn;
+    }
+
+    int getEndRow() const {
+        return endRow;
+    }
+
+    void setEndRow(int endRow) {
+        this->endRow = endRow;
+    }
+
+private:
     int startColumn;
     int startRow;
     int endColumn;
     int endRow;
+
+    int columnToIndex(char column);
 };
-
-inline int columnToIndex(char column) {
-    return column - 'A';
-}
-
-inline CellRange convertRange(const std::string &range) {
-    CellRange result;
-
-    std::size_t found = range.find(':');
-    if (found == std::string::npos) {
-        throw std::invalid_argument("Intervallo non valido");
-    }
-
-    std::string starCell = range.substr(0, found);
-    std::string endCell = range.substr(found + 1);
-    result.startColumn = columnToIndex(starCell[0]);
-    result.startRow = std::stoi(starCell.substr(1)) - 1;
-    result.endColumn = columnToIndex(endCell[0]);
-    result.endRow = std::stoi(endCell.substr(1)) - 1;
-    return result;
-}
 
 #endif //CELLRANGE_H

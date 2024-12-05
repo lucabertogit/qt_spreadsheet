@@ -8,6 +8,8 @@
 #include "Function.h"
 #include "Spreadsheet.h"
 
+class Spreadsheet;
+
 class Sum : public Function {
 public:
     Sum(Spreadsheet *s, const CellRange &r);

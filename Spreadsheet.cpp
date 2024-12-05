@@ -39,7 +39,8 @@ CellRange Spreadsheet::getRange(const QTableWidgetItem *item) {
     }
     std::string range = item->text().toStdString().substr(startRange + 1, endRange - startRange - 1);
     std::cout << "Range: " << range << std::endl; // TODO: togliere utilizzato per prove
-    CellRange result = convertRange(range);
+    CellRange result;
+    result.setRange(range);
     return result;
 }
 

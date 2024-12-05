@@ -8,6 +8,8 @@
 #include "Function.h"
 #include "Spreadsheet.h"
 
+class Spreadsheet;
+
 class Min : public Function {
 public:
     Min(Spreadsheet *s, const CellRange &r);

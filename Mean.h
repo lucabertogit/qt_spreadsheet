@@ -8,6 +8,8 @@
 #include "Function.h"
 #include "Spreadsheet.h"
 
+class Spreadsheet;
+
 class Mean : public Function {
 public:
     Mean(Spreadsheet *s, const CellRange &r);

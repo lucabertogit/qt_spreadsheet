@@ -28,6 +28,7 @@ add_executable(qt_spreadsheet main.cpp
         FactoryFunction.h
         FactoryFunction.cpp
         CellRange.h
+        CellRange.cpp
 )
 
 target_link_libraries(qt_spreadsheet Qt6::Widgets)
