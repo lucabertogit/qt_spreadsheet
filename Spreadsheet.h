@@ -6,18 +6,23 @@
 #define SPREADSHEET_H
 
 #include <list>
+#include <iostream> // TODO: togliere utilizzato per prove
+#include <string>
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTableWidgetItem>
 
 #include "Function.h"
+#include "FactoryFunction.h"
 #include "Subject.h"
+#include "CellRange.h"
+
 
 class Spreadsheet : public QMainWindow, public Subject {
     Q_OBJECT
 public:
-    explicit Spreadsheet(int rows = 10, int cols = 10, QWidget *parent = nullptr);
+    explicit Spreadsheet(QWidget *parent = nullptr);
 
     ~Spreadsheet() override;
 
@@ -32,12 +37,14 @@ public slots:
 
 private:
     // TODO: ricordarsi di liberare la memoria quando l'observer non serve più
+    const int COLS {10};
+    const int ROWS {10};
     QTableWidget *table;
     std::list<Observer*> observers;
 
     std::string getCodeFunction(const QTableWidgetItem *item);
 
-    std::string getRange(const QTableWidgetItem *item);
+    CellRange getRange(const QTableWidgetItem *item);
 };
 
 #endif //SPREADSHEET_H

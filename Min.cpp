@@ -4,7 +4,12 @@
 
 #include "Min.h"
 
-Min::Min(Spreadsheet *s, const std::string &range) : subject(s) {
+Min::Min(Spreadsheet *s, const CellRange &r) : range(r), subject(s) {
+    subject->addObserver(this);
+}
+
+Min::~Min() {
+    subject->removeObserver(this);
 }
 
 void Min::compute() {

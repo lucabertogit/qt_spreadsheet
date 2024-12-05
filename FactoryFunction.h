@@ -5,14 +5,20 @@
 #ifndef FACTORYFUNCTION_H
 #define FACTORYFUNCTION_H
 
+#include <iostream> // TODO: togliere utilizzato solo per prove
 #include <string>
 
 #include "Function.h"
 #include "Spreadsheet.h"
+#include "CellRange.h"
+#include "Sum.h"
+#include "Max.h"
+#include "Min.h"
+#include "Mean.h"
 
 class FactoryFunction {
 public:
-    Function *createFunction(Spreadsheet *s, const std::string &codeFunction, const std::string &range);
+    Function *createFunction(Spreadsheet *s, const std::string &codeFunction, const CellRange &range);
 };
 
 #endif //FACTORYFUNCTION_H

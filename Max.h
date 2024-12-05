@@ -10,13 +10,14 @@
 
 class Max : public Function {
 public:
-    Max(Spreadsheet *s, const std::string &range);
+    Max(Spreadsheet *s, const CellRange &r);
 
-    ~Max() override = default;
+    ~Max() override;
 
     void compute() override;
 
 private:
+    CellRange range;
     Spreadsheet *subject;
 };
 

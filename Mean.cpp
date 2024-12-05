@@ -4,7 +4,12 @@
 
 #include "Mean.h"
 
-Mean::Mean(Spreadsheet *s, const std::string &range) : subject(s) {
+Mean::Mean(Spreadsheet *s, const CellRange &r) : range(r), subject(s) {
+    subject->addObserver(this);
+}
+
+Mean::~Mean() {
+    subject->removeObserver(this);
 }
 
 void Mean::compute() {

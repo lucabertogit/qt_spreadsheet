@@ -4,7 +4,7 @@
 
 #include "Sum.h"
 
-Sum::Sum(Spreadsheet *s, const std::string &range) : subject(s) {
+Sum::Sum(Spreadsheet *s, const CellRange &r) : range(r), subject(s) {
     subject->addObserver(this);
 }
 

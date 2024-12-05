@@ -10,13 +10,14 @@
 
 class Mean : public Function {
 public:
-    Mean(Spreadsheet *s, const std::string &range);
+    Mean(Spreadsheet *s, const CellRange &r);
 
-    ~Mean() override = default;
+    ~Mean() override;
 
     void compute() override;
 
 private:
+    CellRange range;
     Spreadsheet *subject;
 };
 

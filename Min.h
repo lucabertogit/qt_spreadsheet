@@ -10,13 +10,14 @@
 
 class Min : public Function {
 public:
-    Min(Spreadsheet *s, const std::string &range);
+    Min(Spreadsheet *s, const CellRange &r);
 
-    ~Min() override = default;
+    ~Min() override;
 
     void compute() override;
 
 private:
+    CellRange range;
     Spreadsheet *subject;
 };
 

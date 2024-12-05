@@ -2,16 +2,12 @@
 // Created by lucaberto on 29/11/24.
 //
 
-#include <iostream> // TODO: togliere utilizzato per prove
-#include <string>
-
 #include "Spreadsheet.h"
-#include "FactoryFunction.h"
 
-Spreadsheet::Spreadsheet(int rows, int cols, QWidget *parent) : QMainWindow(parent),
-                                                                table(new QTableWidget(rows, cols, this)) {
+Spreadsheet::Spreadsheet(QWidget *parent) : QMainWindow(parent),
+                                            table(new QTableWidget(ROWS, COLS, this)) {
     table->setSizeAdjustPolicy(QTableWidget::AdjustToContents);
-    for (int i = 0; i < cols; i++) {
+    for (int i = 0; i < COLS; i++) {
         QString character(QChar('A' + i));
         table->setHorizontalHeaderItem(i, new QTableWidgetItem(character));
     }
@@ -26,24 +22,25 @@ Spreadsheet::~Spreadsheet() {
 }
 
 std::string Spreadsheet::getCodeFunction(const QTableWidgetItem *item) {
-    std::string codeFunction;
-    std::size_t startRange = item->text().toStdString().find("(");
-    if (startRange != std::string::npos) {
-        codeFunction = item->text().toStdString().substr(1, startRange - 1);
-        std::cout << "Code Function: " << codeFunction << std::endl; // TODO: togliere utilizzato per prove
+    std::size_t startRange = item->text().toStdString().find('(');
+    if (startRange == std::string::npos) {
+        throw std::invalid_argument("Codice funzione non valido");
     }
+    std::string codeFunction = item->text().toStdString().substr(1, startRange - 1);
+    std::cout << "Code Function: " << codeFunction << std::endl; // TODO: togliere utilizzato per prove
     return codeFunction;
 }
 
-std::string Spreadsheet::getRange(const QTableWidgetItem *item) {
-    std::string range;
-    std::size_t startRange = item->text().toStdString().find("(");
-    std::size_t endRange = item->text().toStdString().find(")");
-    if (startRange != std::string::npos && endRange != std::string::npos) {
-        range = item->text().toStdString().substr(startRange + 1, endRange - startRange - 1);
-        std::cout << "Range: " << range << std::endl; // TODO: togliere utilizzato per prove
+CellRange Spreadsheet::getRange(const QTableWidgetItem *item) {
+    std::size_t startRange = item->text().toStdString().find('(');
+    std::size_t endRange = item->text().toStdString().find(')');
+    if (startRange == std::string::npos || endRange == std::string::npos) {
+        throw std::invalid_argument("Intervallo non valido");
     }
-    return range;
+    std::string range = item->text().toStdString().substr(startRange + 1, endRange - startRange - 1);
+    std::cout << "Range: " << range << std::endl; // TODO: togliere utilizzato per prove
+    CellRange result = convertRange(range);
+    return result;
 }
 
 void Spreadsheet::addObserver(Observer *o) {
@@ -62,12 +59,14 @@ void Spreadsheet::notify() {
 void Spreadsheet::itemChanged(QTableWidgetItem *item) {
     std::string cell = item->text().toStdString();
     if (cell[0] == '=') {
-        FactoryFunction factory;
-        std::string codeFunction = getCodeFunction(item);
-        std::string range = getRange(item);
-        Function *function = factory.createFunction(this, codeFunction, range);
-        if (!function)
+        try {
+            FactoryFunction factory;
+            std::string codeFunction = getCodeFunction(item);
+            CellRange cellRange = getRange(item);
+            factory.createFunction(this, codeFunction, cellRange);
+        } catch (std::invalid_argument &e) {
             item->setText("#NOME?");
+        }
     }
     notify();
 }

@@ -21,18 +21,17 @@ inline int columnToIndex(char column) {
 inline CellRange convertRange(const std::string &range) {
     CellRange result;
 
-    std::size_t found = range.find(":");
-    if (found != std::string::npos) {
-        std::string starCell = range.substr(0, found);
-        std::string endCell = range.substr(found + 1);
-        result.startColumn = columnToIndex(starCell[0]);
-        result.startRow = std::stoi(starCell.substr(1)) - 1;
-        result.endColumn = columnToIndex(endCell[0]);
-        result.endRow = std::stoi(endCell.substr(1)) - 1;
-    } else {
-        // TODO: lanciare eccezione
+    std::size_t found = range.find(':');
+    if (found == std::string::npos) {
+        throw std::invalid_argument("Intervallo non valido");
     }
 
+    std::string starCell = range.substr(0, found);
+    std::string endCell = range.substr(found + 1);
+    result.startColumn = columnToIndex(starCell[0]);
+    result.startRow = std::stoi(starCell.substr(1)) - 1;
+    result.endColumn = columnToIndex(endCell[0]);
+    result.endRow = std::stoi(endCell.substr(1)) - 1;
     return result;
 }
 

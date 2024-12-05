@@ -3,18 +3,8 @@
 //
 
 #include "FactoryFunction.h"
-#include "Sum.h"
-#include "Max.h"
-#include "Min.h"
-#include "Mean.h"
 
-Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &codeFunction, const std::string &range) {
-    // TODO: scomporre range in valori interi
-    int firstColumn;
-    int lastColumn;
-    int firstRow;
-    int lastRow;
-
+Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &codeFunction, const CellRange &range) {
     if (codeFunction == "SUM") {
         return new Sum(s, range);
     } else if (codeFunction == "MAX") {
@@ -24,5 +14,6 @@ Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &cod
     } else if (codeFunction == "MEAN") {
         return new Mean(s, range);
     }
+    // TODO: anziche' passare nullptr lanciare un eccezione
     return nullptr;
 }
