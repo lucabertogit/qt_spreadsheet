@@ -5,7 +5,6 @@
 #ifndef FACTORYFUNCTION_H
 #define FACTORYFUNCTION_H
 
-#include <iostream> // TODO: togliere utilizzato solo per prove
 #include <string>
 
 #include "Function.h"

@@ -13,7 +13,7 @@ Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &cod
         return new Min(s, range);
     } else if (codeFunction == "MEAN") {
         return new Mean(s, range);
+    } else {
+        throw std::invalid_argument("Funzione non valida");
     }
-    // TODO: anziche' passare nullptr lanciare un eccezione
-    return nullptr;
 }

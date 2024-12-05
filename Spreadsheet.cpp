@@ -27,7 +27,6 @@ std::string Spreadsheet::getCodeFunction(const QTableWidgetItem *item) {
         throw std::invalid_argument("Codice funzione non valido");
     }
     std::string codeFunction = item->text().toStdString().substr(1, startRange - 1);
-    std::cout << "Code Function: " << codeFunction << std::endl; // TODO: togliere utilizzato per prove
     return codeFunction;
 }
 
@@ -38,7 +37,6 @@ CellRange Spreadsheet::getRange(const QTableWidgetItem *item) {
         throw std::invalid_argument("Intervallo non valido");
     }
     std::string range = item->text().toStdString().substr(startRange + 1, endRange - startRange - 1);
-    std::cout << "Range: " << range << std::endl; // TODO: togliere utilizzato per prove
     CellRange result;
     result.setRange(range);
     return result;

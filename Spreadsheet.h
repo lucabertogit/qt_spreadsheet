@@ -6,7 +6,6 @@
 #define SPREADSHEET_H
 
 #include <list>
-#include <iostream> // TODO: togliere utilizzato per prove
 #include <string>
 
 #include <QtWidgets/QMainWindow>
