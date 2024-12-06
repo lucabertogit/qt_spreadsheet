@@ -6,8 +6,6 @@
 #define CELLRANGE_H
 
 #include <string>
-#include <algorithm>
-#include <stdexcept>
 
 class CellRange {
 public:

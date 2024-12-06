@@ -2,6 +2,9 @@
 // Created by lucaberto on 05/12/24.
 //
 
+#include <algorithm>
+#include <stdexcept>
+
 #include "CellRange.h"
 
 CellRange::CellRange() : startColumn(0), startRow(0), endColumn(0), endRow(0) {
