@@ -21,6 +21,7 @@ public:
 private:
     CellRange range;
     Spreadsheet *subject;
+    QTableWidgetItem *item;
 };
 
 #endif //SUM_H

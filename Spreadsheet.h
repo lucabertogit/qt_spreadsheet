@@ -31,6 +31,10 @@ public:
 
     void notify() override;
 
+    const QTableWidget &getTable() const {
+        return *table;
+    }
+
 public slots:
     void itemChanged(QTableWidgetItem *item);
 
