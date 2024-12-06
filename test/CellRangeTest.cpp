@@ -16,26 +16,35 @@ TEST(CellRange, DefaultCostructor) {
 
 TEST(CellRange, TestSetRange) {
     CellRange range;
+    
     range.setRange("A1:C10");
-
     ASSERT_EQ(range.getStartColumn(), 0);
     ASSERT_EQ(range.getStartRow(), 0);
     ASSERT_EQ(range.getEndColumn(), 2);
     ASSERT_EQ(range.getEndRow(), 9);
 
-    range.setRange("a1:c10");
+    range.setRange("b2:d8");
+    ASSERT_EQ(range.getStartColumn(), 1);
+    ASSERT_EQ(range.getStartRow(), 1);
+    ASSERT_EQ(range.getEndColumn(), 3);
+    ASSERT_EQ(range.getEndRow(), 7);
 
     range.setRange("C10:A1");
+    ASSERT_EQ(range.getStartColumn(), 0);
+    ASSERT_EQ(range.getStartRow(), 0);
+    ASSERT_EQ(range.getEndColumn(), 2);
+    ASSERT_EQ(range.getEndRow(), 9);
 
-    range.setRange("A10:C1");
-
-    range.setRange("A1:C8:D10");
+    range.setRange("b8:D2");
+    ASSERT_EQ(range.getStartColumn(), 1);
+    ASSERT_EQ(range.getStartRow(), 1);
+    ASSERT_EQ(range.getEndColumn(), 3);
+    ASSERT_EQ(range.getEndRow(), 7);
 }
 
-TEST(CellRange, TestExceptionRange) {
-    CellRange range;
-    
+TEST(CellRange, TestExceptionRange) { 
     try {
+        CellRange range;
         range.setRange("");
         FAIL() << "Expected std::invalid_argument";
     } catch (std::invalid_argument &e) {
@@ -45,6 +54,7 @@ TEST(CellRange, TestExceptionRange) {
     }
     
     try {
+        CellRange range;
         range.setRange("A1C10");
         FAIL() << "Expected std::invalid_argument";
     } catch (std::invalid_argument &e) {
@@ -54,6 +64,7 @@ TEST(CellRange, TestExceptionRange) {
     }
 
     try {
+        CellRange range;
         range.setRange("A1;A10");
         FAIL() << "Expected std::invalid_argument";
     } catch (std::invalid_argument &e) {
@@ -63,6 +74,7 @@ TEST(CellRange, TestExceptionRange) {
     }
 
     try {
+        CellRange range;
         range.setRange("A1:");
         FAIL() << "Expected std::invalid_argument";
     } catch (std::invalid_argument &e) {
@@ -72,6 +84,7 @@ TEST(CellRange, TestExceptionRange) {
     }
 
     try {
+        CellRange range;
         range.setRange(":C10");
         FAIL() << "Expected std::invalid_argument";
     } catch (std::invalid_argument &e) {
@@ -81,6 +94,7 @@ TEST(CellRange, TestExceptionRange) {
     }
 
     try {
+        CellRange range;
         range.setRange("?1:C10");
         FAIL() << "Expected std::invalid_argument";
     } catch (std::invalid_argument &e) {
@@ -90,6 +104,7 @@ TEST(CellRange, TestExceptionRange) {
     }
 
     try {
+        CellRange range;
         range.setRange("A1:!10");
         FAIL() << "Expected std::invalid_argument";
     } catch (std::invalid_argument &e) {
@@ -98,5 +113,23 @@ TEST(CellRange, TestExceptionRange) {
         FAIL() << "Expected std::invalid_argument";
     }
 
-    range.setRange("A1;C8:D10");
+    try {
+        CellRange range;
+        range.setRange("A1;C8:D10");
+        FAIL() << "Expected std::invalid_argument";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
+    } catch (...) {
+        FAIL() << "Expected std::invalid_argument";
+    }
+
+    try {
+        CellRange range;
+        range.setRange("A1:C8:D10");
+        FAIL() << "Expected std::invalid_argument";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
+    } catch (...) {
+        FAIL() << "Expected std::invalid_argument";
+    }
 }
