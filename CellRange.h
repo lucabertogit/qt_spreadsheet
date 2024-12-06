@@ -56,7 +56,6 @@ private:
     int columnToIndex(char column);
 
     void sortRange();
-
 };
 
 #endif //CELLRANGE_H
