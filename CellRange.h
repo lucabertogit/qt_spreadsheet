@@ -6,6 +6,7 @@
 #define CELLRANGE_H
 
 #include <string>
+#include <algorithm>
 #include <stdexcept>
 
 class CellRange {
@@ -53,6 +54,9 @@ private:
     int endRow;
 
     int columnToIndex(char column);
+
+    void sortRange();
+
 };
 
 #endif //CELLRANGE_H
