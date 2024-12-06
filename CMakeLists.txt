@@ -11,7 +11,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt6Widgets REQUIRED)
 
 add_subdirectory(test)
-set(SOURCE_FILES)
+set(SOURCE_FILES CellRange.h CellRange.cpp)
 
 add_executable(qt_spreadsheet main.cpp)
 add_library(core ${SOURCE_FILES})
