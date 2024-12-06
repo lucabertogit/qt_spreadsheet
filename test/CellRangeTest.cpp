@@ -22,6 +22,39 @@ TEST(CellRange, TestSetRange) {
     ASSERT_EQ(range.getStartRow(), 0);
     ASSERT_EQ(range.getEndColumn(), 2);
     ASSERT_EQ(range.getEndRow(), 9);
+}
 
-    // TODO: testare in caso di intervalli non validi
+TEST(CellRange, TestExceptionRange) {
+    CellRange range;
+    
+    try {
+        range.setRange("");
+        FAIL() << "Expected std::invalid_argument";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
+    } catch (...) {
+        FAIL() << "Expected std::invalid_argument";
+    }
+    
+    range.setRange("A1C10");
+
+    range.setRange("A1;A10");
+
+    range.setRange("A1:");
+
+    range.setRange(":C10");
+
+    range.setRange("a1:c10");
+
+    range.setRange("?1:C10");
+
+    range.setRange("A1:!10");
+
+    range.setRange("C10:A1");
+
+    range.setRange("A10:C1");
+
+    range.setRange("A1:C8:D10");
+
+    range.setRange("A1;C8:D10");
 }
