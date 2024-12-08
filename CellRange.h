@@ -53,6 +53,8 @@ private:
 
     int columnToIndex(char column);
 
+    int rowToIndex(const std::string &text);
+
     void sortRange();
 };
 

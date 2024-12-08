@@ -30,9 +30,9 @@ void CellRange::setRange(const std::string &range) {
         throw std::invalid_argument("Intervallo non valido");
 
     startColumn = columnToIndex(startCell[0]);
-    startRow = std::stoi(startCell.substr(1)) - 1;
+    startRow = rowToIndex(startCell);
     endColumn = columnToIndex(endCell[0]);
-    endRow = std::stoi(endCell.substr(1)) - 1;
+    endRow = rowToIndex(endCell);
     sortRange();
 }
 
@@ -40,6 +40,15 @@ int CellRange::columnToIndex(char column) {
     if (column < 'A' || column > 'Z')
         throw std::invalid_argument("Intervallo non valido");
     return column - 'A';
+}
+
+int CellRange::rowToIndex(const std::string &text) {
+    std::size_t processed_chars = 0;
+    std::string subText = text.substr(1);
+    int result = std::stoi(subText, &processed_chars) - 1;
+    if (subText.length() != processed_chars)
+        throw std::invalid_argument("Intervallo non valido");
+    return result;
 }
 
 void CellRange::sortRange() {
