@@ -46,90 +46,90 @@ TEST(CellRange, TestExceptionRange) {
     try {
         CellRange range;
         range.setRange("");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezzione";
     }
     
     try {
         CellRange range;
         range.setRange("A1C10");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 
     try {
         CellRange range;
         range.setRange("A1;A10");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 
     try {
         CellRange range;
         range.setRange("A1:");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 
     try {
         CellRange range;
         range.setRange(":C10");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 
     try {
         CellRange range;
         range.setRange("?1:C10");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 
     try {
         CellRange range;
         range.setRange("A1:!10");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 
     try {
         CellRange range;
         range.setRange("A1;C8:D10");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 
     try {
         CellRange range;
         range.setRange("A1:C8:D10");
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Nessuna eccezione lanciata";
     } catch (std::invalid_argument &e) {
         ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
     } catch (...) {
-        FAIL() << "Expected std::invalid_argument";
+        FAIL() << "Lanciata altra eccezione";
     }
 }
