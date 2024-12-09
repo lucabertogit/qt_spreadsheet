@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "../CellRange.h"
+#include "../src/CellRange.h"
 
 class CellRangeSuite : public ::testing::Test {
 protected:

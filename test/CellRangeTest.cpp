@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "../CellRange.h"
+#include "../src/CellRange.h"
 
 TEST(CellRange, DefaultCostructor) {
     CellRange range;
