@@ -11,24 +11,24 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt6Widgets REQUIRED)
 
 add_executable(qt_spreadsheet main.cpp
-        Spreadsheet.h
-        Spreadsheet.cpp
-        Function.h
-        Sum.h
-        Sum.cpp
-        Max.h
-        Max.cpp
-        Min.h
-        Min.cpp
-        Mean.h
-        Mean.cpp
-        Subject.h
-        Observer.h
-        Function.cpp
-        FactoryFunction.h
-        FactoryFunction.cpp
-        CellRange.h
-        CellRange.cpp
+        src/Spreadsheet.h
+        src/Spreadsheet.cpp
+        src/Function.h
+        src/Sum.h
+        src/Sum.cpp
+        src/Max.h
+        src/Max.cpp
+        src/Min.h
+        src/Min.cpp
+        src/Mean.h
+        src/Mean.cpp
+        src/Subject.h
+        src/Observer.h
+        src/Function.cpp
+        src/FactoryFunction.h
+        src/FactoryFunction.cpp
+        src/CellRange.h
+        src/CellRange.cpp
 )
 
 target_link_libraries(qt_spreadsheet Qt6::Widgets)

@@ -1,6 +1,6 @@
 #include <QtWidgets/QApplication>
 
-#include "Spreadsheet.h"
+#include "src/Spreadsheet.h"
 
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
