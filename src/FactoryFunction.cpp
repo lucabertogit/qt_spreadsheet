@@ -3,15 +3,18 @@
 //
 
 #include "FactoryFunction.h"
+#include "Utility.h"
 
 Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &codeFunction, const CellRange &range) {
-    if (codeFunction == "SUM") {
+    std::string code = codeFunction;
+    toUpper(code);
+    if (code == "SUM") {
         return new Sum(s, range);
-    } else if (codeFunction == "MAX") {
+    } else if (code == "MAX") {
         return new Max(s, range);
-    } else if (codeFunction == "MIN") {
+    } else if (code == "MIN") {
         return new Min(s, range);
-    } else if (codeFunction == "MEAN") {
+    } else if (code == "MEAN") {
         return new Mean(s, range);
     } else {
         throw std::invalid_argument("Funzione non valida");
