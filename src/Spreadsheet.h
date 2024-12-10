@@ -35,6 +35,10 @@ public:
         return *table;
     }
 
+    std::string getCodeFunction(const QTableWidgetItem *item);
+
+    CellRange getRange(const QTableWidgetItem *item);
+
 public slots:
     void itemChanged(QTableWidgetItem *item);
 
@@ -44,10 +48,6 @@ private:
     const int ROWS{10};
     QTableWidget *table;
     std::list<Observer*> observers;
-
-    std::string getCodeFunction(const QTableWidgetItem *item);
-
-    CellRange getRange(const QTableWidgetItem *item);
 };
 
 #endif //SPREADSHEET_H
