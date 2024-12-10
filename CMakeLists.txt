@@ -30,6 +30,7 @@ set(HEADERS src/Spreadsheet.h
         src/Max.h
         src/Min.h
         src/Mean.h
+        src/Utility.h
 )
 
 add_executable(qt_spreadsheet main.cpp ${SOURCES} ${HEADERS})
