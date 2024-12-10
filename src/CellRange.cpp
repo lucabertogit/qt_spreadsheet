@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 #include "CellRange.h"
+#include "Utility.h"
 
 CellRange::CellRange() : startColumn(0), startRow(0), endColumn(0), endRow(0) {
 }
@@ -20,12 +21,12 @@ void CellRange::setRange(const std::string &range) {
     }
 
     std::string startCell = range.substr(0, found);
-    std::transform(startCell.begin(), startCell.end(), startCell.begin(), ::toupper);
+    toUpper(startCell);
     if (startCell.empty())
         throw std::invalid_argument("Intervallo non valido");
 
     std::string endCell = range.substr(found + 1);
-    std::transform(endCell.begin(), endCell.end(), endCell.begin(), ::toupper);
+    toUpper(endCell);
     if (endCell.empty())
         throw std::invalid_argument("Intervallo non valido");
 
