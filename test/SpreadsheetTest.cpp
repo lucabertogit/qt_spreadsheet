@@ -362,33 +362,24 @@ TEST(Spreadsheet, TestGetRange) {
         FAIL() << "Lanciata altra eccezione";
     }
 
-    try {
-        item.setText("=SUM((A1:C10))");
-        range = sheet.getRange(&item);
-        FAIL() << "Nessuna eccezione lanciata";
-    } catch (std::invalid_argument &e) {
-        ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
-    } catch (...) {
-        FAIL() << "Lanciata altra eccezione";
-    }
+    item.setText("=SUM((A1:C10))");
+    range = sheet.getRange(&item);
+    ASSERT_EQ(range.getStartColumn(), 0);
+    ASSERT_EQ(range.getStartRow(), 0);
+    ASSERT_EQ(range.getEndColumn(), 2);
+    ASSERT_EQ(range.getEndRow(), 9);
 
-    try {
-        item.setText("=SUM((A1:C10)");
-        range = sheet.getRange(&item);
-        FAIL() << "Nessuna eccezione lanciata";
-    } catch (std::invalid_argument &e) {
-        ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
-    } catch (...) {
-        FAIL() << "Lanciata altra eccezione";
-    }
+    item.setText("=SUM((A1:C10)");
+    range = sheet.getRange(&item);
+    ASSERT_EQ(range.getStartColumn(), 0);
+    ASSERT_EQ(range.getStartRow(), 0);
+    ASSERT_EQ(range.getEndColumn(), 2);
+    ASSERT_EQ(range.getEndRow(), 9);
 
-    try {
-        item.setText("=SUM(A1:C10))");
-        range = sheet.getRange(&item);
-        FAIL() << "Nessuna eccezione lanciata";
-    } catch (std::invalid_argument &e) {
-        ASSERT_EQ(e.what(), std::string("Intervallo non valido"));
-    } catch (...) {
-        FAIL() << "Lanciata altra eccezione";
-    }
+    item.setText("=SUM(A1:C10))");
+    range = sheet.getRange(&item);
+    ASSERT_EQ(range.getStartColumn(), 0);
+    ASSERT_EQ(range.getStartRow(), 0);
+    ASSERT_EQ(range.getEndColumn(), 2);
+    ASSERT_EQ(range.getEndRow(), 9);
 }
