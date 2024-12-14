@@ -19,6 +19,7 @@ set(SOURCES src/Spreadsheet.cpp
         src/Min.cpp
         src/Mean.cpp
         src/Controller.cpp
+        src/View.cpp
 )
 
 set(HEADERS src/Spreadsheet.h
@@ -33,6 +34,7 @@ set(HEADERS src/Spreadsheet.h
         src/Mean.h
         src/Utility.h
         src/Controller.h
+        src/View.h
 )
 
 add_executable(qt_spreadsheet main.cpp ${SOURCES} ${HEADERS})

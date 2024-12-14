@@ -27,6 +27,8 @@ set(PROJECT_SOURCES ../src/CellRange.cpp
         ../src/Sum.h
         ../src/Controller.h
         ../src/Controller.cpp
+        ../src/View.h
+        ../src/View.cpp
 )
 
 add_executable(runQtSpreadsheetTests ${TEST_SOURCES} ${PROJECT_SOURCES})
