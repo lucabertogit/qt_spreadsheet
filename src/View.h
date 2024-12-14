@@ -5,6 +5,17 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-class View {};
+#include <QtWidgets/QTableView>
+#include "Model.h"
+
+class View : public QTableView {
+public:
+    explicit View(Model *m, QWidget *parent = nullptr);
+
+    ~View() override = default;
+
+private:
+    Model *model;
+};
 
 #endif //VIEW_H

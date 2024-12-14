@@ -31,10 +31,12 @@ set(PROJECT_SOURCES ../src/CellRange.cpp
         ../src/View.cpp
         ../src/Model.h
         ../src/Model.cpp
+        ../src/MainWindow.h
+        ../src/MainWindow.cpp
 )
 
 add_executable(runQtSpreadsheetTests ${TEST_SOURCES} ${PROJECT_SOURCES})
 
-target_link_libraries(runQtSpreadsheetTests gtest gtest_main Qt6::Widgets)
+target_link_libraries(runQtSpreadsheetTests gtest gtest_main Qt6::Gui Qt6::Widgets)
 
 add_test(NAME StSpreadsheetTest COMMAND runQtSpreadsheetTests)

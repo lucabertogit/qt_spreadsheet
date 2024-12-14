@@ -8,7 +8,7 @@ set(CMAKE_PREFIX_PATH "/home/lucaberto/Qt/6.7.2/gcc_64/lib/cmake")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6Widgets REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Gui Widgets)
 
 set(SOURCES src/Spreadsheet.cpp
         src/CellRange.cpp
@@ -21,6 +21,7 @@ set(SOURCES src/Spreadsheet.cpp
         src/Controller.cpp
         src/View.cpp
         src/Model.cpp
+        src/MainWindow.cpp
 )
 
 set(HEADERS src/Spreadsheet.h
@@ -37,10 +38,11 @@ set(HEADERS src/Spreadsheet.h
         src/Controller.h
         src/View.h
         src/Model.h
+        src/MainWindow.h
 )
 
 add_executable(qt_spreadsheet main.cpp ${SOURCES} ${HEADERS})
 
-target_link_libraries(qt_spreadsheet Qt6::Widgets)
+target_link_libraries(qt_spreadsheet Qt6::Gui Qt6::Widgets)
 
 add_subdirectory(test)

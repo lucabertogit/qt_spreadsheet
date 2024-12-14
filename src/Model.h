@@ -5,7 +5,15 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-class Model {
+#include <QStandardItemModel>
+
+class Model : public QStandardItemModel {
+public:
+    Model(int rows, int columns, QObject *parent = nullptr);
+
+    ~Model() override = default;
+
+private:
 };
 
 #endif //MODEL_H

@@ -362,19 +362,27 @@ TEST(Spreadsheet, TestGetRange) {
         FAIL() << "Lanciata altra eccezione";
     }
 
-    item.setText("=SUM((A1:C10))");
-    range = sheet.getRange(&item);
-    ASSERT_EQ(range.getStartColumn(), 0);
-    ASSERT_EQ(range.getStartRow(), 0);
-    ASSERT_EQ(range.getEndColumn(), 2);
-    ASSERT_EQ(range.getEndRow(), 9);
+    try {
+        item.setText("=SUM((A1:C10))");
+        range = sheet.getRange(&item);
+        ASSERT_EQ(range.getStartColumn(), 0);
+        ASSERT_EQ(range.getStartRow(), 0);
+        ASSERT_EQ(range.getEndColumn(), 2);
+        ASSERT_EQ(range.getEndRow(), 9);
+    } catch (std::invalid_argument &e) {
+        FAIL() << e.what();
+    }
 
-    item.setText("=SUM((A1:C10)");
-    range = sheet.getRange(&item);
-    ASSERT_EQ(range.getStartColumn(), 0);
-    ASSERT_EQ(range.getStartRow(), 0);
-    ASSERT_EQ(range.getEndColumn(), 2);
-    ASSERT_EQ(range.getEndRow(), 9);
+    try {
+        item.setText("=SUM((A1:C10)");
+        range = sheet.getRange(&item);
+        ASSERT_EQ(range.getStartColumn(), 0);
+        ASSERT_EQ(range.getStartRow(), 0);
+        ASSERT_EQ(range.getEndColumn(), 2);
+        ASSERT_EQ(range.getEndRow(), 9);
+    } catch (std::invalid_argument &e) {
+        FAIL() << e.what();
+    }
 
     item.setText("=SUM(A1:C10))");
     range = sheet.getRange(&item);
