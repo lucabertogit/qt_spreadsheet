@@ -22,7 +22,7 @@ public:
     void notify() override;
 
 private:
-    std::list<Observer*> observers;
+    std::list<Observer *> observers;
 };
 
 #endif //MODEL_H

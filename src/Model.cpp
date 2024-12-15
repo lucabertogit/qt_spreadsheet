@@ -24,6 +24,6 @@ void Model::removeObserver(Observer *o) {
 }
 
 void Model::notify() {
-    for (const auto observer : observers)
+    for (const auto observer: observers)
         observer->update();
 }
