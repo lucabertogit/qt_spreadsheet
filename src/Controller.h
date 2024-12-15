@@ -5,19 +5,26 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include <list>
 #include "Model.h"
+#include "Function.h"
 
 class Controller {
 public:
     explicit Controller(Model *m);
 
-    ~Controller();
+    ~Controller() = default;
 
     void setPrevContent(const QModelIndex &index);
 
+    void execute(const QString &currentItemText);
+
+    void createFunction();
+
 private:
     Model *model;
-    QStandardItem *prevItem;
+    QString prevItemText;
+    std::list<Function*> functions;
 };
 
 #endif //CONTROLLER_H

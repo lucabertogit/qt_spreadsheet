@@ -3,15 +3,24 @@
 //
 
 #include "Controller.h"
+#include "FactoryFunction.h"
 
-Controller::Controller(Model *m) : model(m), prevItem(nullptr) {
-}
-
-Controller::~Controller() {
-    if (!prevItem)
-        delete prevItem;
+Controller::Controller(Model *m) : model(m) {
 }
 
 void Controller::setPrevContent(const QModelIndex &index) {
-    prevItem = model->itemFromIndex(index)->clone();
+    prevItemText = model->itemFromIndex(index)->text();
+}
+
+void Controller::execute(const QString &currentItemText) {
+    // TODO: esaminare tutte le varie casistiche
+    if (currentItemText != prevItemText)
+        if (currentItemText[0] == '=')
+            createFunction();
+    prevItemText.clear();
+}
+
+void Controller::createFunction() {
+    FactoryFunction factory;
+    // TODO: implementare funzione
 }

@@ -3,8 +3,9 @@
 //
 
 #include "FactoryFunction.h"
-#include "Utility.h"
 
+// TODO: rimuovere
+/*
 Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &codeFunction, const CellRange &range) {
     std::string code = codeFunction;
     toUpper(code);
@@ -19,4 +20,9 @@ Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &cod
     } else {
         throw std::invalid_argument("Funzione non valida");
     }
+}
+*/
+
+Function * FactoryFunction::createFunction(Model *m, const std::string &formula) {
+    // TODO: implementare funzione
 }

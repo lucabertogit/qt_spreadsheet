@@ -8,8 +8,7 @@
 #include <string>
 
 #include "Function.h"
-#include "Spreadsheet.h"
-#include "CellRange.h"
+#include "Model.h"
 #include "Sum.h"
 #include "Max.h"
 #include "Min.h"
@@ -17,7 +16,7 @@
 
 class FactoryFunction {
 public:
-    Function *createFunction(Spreadsheet *s, const std::string &codeFunction, const CellRange &range);
+    Function *createFunction(Model *m, const std::string &formula);
 };
 
 #endif //FACTORYFUNCTION_H

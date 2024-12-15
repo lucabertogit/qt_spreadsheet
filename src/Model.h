@@ -21,6 +21,9 @@ public:
 
     void notify() override;
 
+protected slots:
+    void onItemChanged(QStandardItem *item);
+
 private:
     std::list<Observer *> observers;
 };

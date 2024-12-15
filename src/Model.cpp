@@ -13,6 +13,7 @@ Model::Model(int rows, int columns, QObject *parent) : QStandardItemModel(rows, 
         verticalLabels.append(QString::number(row + 1));
     setHorizontalHeaderLabels(horizontalLabels);
     setVerticalHeaderLabels(verticalLabels);
+    connect(this, &QStandardItemModel::itemChanged, this, &Model::onItemChanged);
 }
 
 void Model::addObserver(Observer *o) {
@@ -26,4 +27,8 @@ void Model::removeObserver(Observer *o) {
 void Model::notify() {
     for (const auto observer: observers)
         observer->update();
+}
+
+void Model::onItemChanged(QStandardItem *item) {
+    notify();
 }

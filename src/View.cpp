@@ -3,6 +3,7 @@
 //
 
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QLineEdit>
 #include "View.h"
 
 View::View(Model *m, Controller *c, QWidget *parent) : QTableView(parent), model(m), controller(c) {
@@ -16,4 +17,12 @@ bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger
     if (result)
         controller->setPrevContent(index);
     return result;
+}
+
+void View::commitData(QWidget *editor) {
+    if (auto *lineEdit = qobject_cast<QLineEdit *>(editor)) {
+        QString currentText = lineEdit->text();
+        controller->execute(currentText);
+    }
+    QTableView::commitData(editor);
 }
