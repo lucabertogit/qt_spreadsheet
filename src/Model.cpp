@@ -14,3 +14,16 @@ Model::Model(int rows, int columns, QObject *parent) : QStandardItemModel(rows, 
     setHorizontalHeaderLabels(horizontalLabels);
     setVerticalHeaderLabels(verticalLabels);
 }
+
+void Model::addObserver(Observer *o) {
+    observers.push_back(o);
+}
+
+void Model::removeObserver(Observer *o) {
+    observers.remove(o);
+}
+
+void Model::notify() {
+    for (const auto observer : observers)
+        observer->update();
+}
