@@ -15,9 +15,9 @@ public:
 
     ~Controller() = default;
 
-    void execute(const QString &currentItemText);
+    void execute(const QModelIndex &index, const QString &newItemText);
 
-    void createFunction(const QModelIndex &index, const QString &currentItemText);
+    void createFunction(const QModelIndex &index, const QString &newItemText);
 
 private:
     Model *model;
