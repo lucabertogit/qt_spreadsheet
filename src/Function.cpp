@@ -16,6 +16,11 @@ const std::string & Function::getExtendedFormula() const {
     return extendedFormula;
 }
 
+const QModelIndex & Function::getIndex() const {
+    return index;
+}
+
+
 void Function::update() {
     compute();
 }
