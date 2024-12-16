@@ -24,7 +24,7 @@ Function * FactoryFunction::createFunction(Model *model, const CodeFunction code
     }
 }
 
-FactoryFunction::CodeFunction FactoryFunction::codeToString(const std::string &code) {
+FactoryFunction::CodeFunction FactoryFunction::codeFromString(const std::string &code) {
     std::string codeFunction = code;
     std::transform(codeFunction.begin(), codeFunction.end(), codeFunction.begin(), ::toupper);
     if (codeFunction == "SUM")
