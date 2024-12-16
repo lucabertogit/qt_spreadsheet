@@ -4,7 +4,7 @@
 
 #include "Sum.h"
 
-Sum::Sum(Model *model, const std::string &formula) : Function(model, formula) {
+Sum::Sum(Model *model, const QModelIndex &index, const std::string &formula) : Function(model, index, formula) {
 }
 
 void Sum::compute() {
