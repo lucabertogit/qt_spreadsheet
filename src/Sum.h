@@ -9,7 +9,7 @@
 
 class Sum : public Function {
 public:
-    Sum(Model *model, const std::string &formula);
+    Sum(Model *model, const QModelIndex &index, const std::string &formula);
 
     ~Sum() override = default;
 
