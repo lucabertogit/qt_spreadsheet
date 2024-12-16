@@ -9,7 +9,7 @@
 
 class Max : public Function {
 public:
-    Max(Model *model, const std::string &formula);
+    Max(Model *model, const QModelIndex &index, const std::string &formula);
 
     ~Max() override = default;
 
