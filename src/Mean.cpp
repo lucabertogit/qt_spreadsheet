@@ -4,7 +4,7 @@
 
 #include "Mean.h"
 
-Mean::Mean(Model *model, const std::string &formula) : Function(model, formula) {
+Mean::Mean(Model *model, const QModelIndex &index, const std::string &formula) : Function(model, index, formula) {
 }
 
 void Mean::compute() {
