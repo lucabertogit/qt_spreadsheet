@@ -16,7 +16,7 @@ public:
 
     Function *createFunction(Model *model, CodeFunction code, const std::string &formula);
 
-    CodeFunction codeToString(const std::string &code);
+    CodeFunction codeFromString(const std::string &code);
 };
 
 #endif //FACTORYFUNCTION_H
