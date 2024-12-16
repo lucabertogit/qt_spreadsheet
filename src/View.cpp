@@ -21,8 +21,9 @@ bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger
 
 void View::commitData(QWidget *editor) {
     if (auto *lineEdit = qobject_cast<QLineEdit *>(editor)) {
+        QModelIndex index = currentIndex();
         QString currentText = lineEdit->text();
-        controller->execute(currentText);
+        controller->execute(index, currentText);
     }
     QTableView::commitData(editor);
 }
