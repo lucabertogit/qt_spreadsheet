@@ -14,7 +14,7 @@ class FactoryFunction {
 public:
     enum class CodeFunction { Sum, Max, Min, Mean };
 
-    Function *createFunction(Model *model, CodeFunction code, const std::string &formula);
+    Function *createFunction(Model *model, CodeFunction code, const QModelIndex &index, const std::string &formula);
 
     CodeFunction codeFromString(const std::string &code);
 };
