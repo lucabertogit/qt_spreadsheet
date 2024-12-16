@@ -15,15 +15,12 @@ public:
 
     ~Controller() = default;
 
-    void setPrevContent(const QModelIndex &index);
-
     void execute(const QString &currentItemText);
 
     void createFunction(const QString &currentItemText);
 
 private:
     Model *model;
-    QString prevItemText;
     std::list<Function*> functions;
 };
 
