@@ -22,5 +22,6 @@ void Controller::execute(const QString &currentItemText) {
 
 void Controller::createFunction(const QString &currentItemText) {
     FactoryFunction factory;
+    std::string codeFunction;
     // TODO: implementare funzione
 }
