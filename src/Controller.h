@@ -21,7 +21,6 @@ public:
 
 private:
     Model *model;
-    std::list<Function*> functions;
 };
 
 #endif //CONTROLLER_H

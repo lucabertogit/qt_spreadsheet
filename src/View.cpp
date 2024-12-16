@@ -14,8 +14,9 @@ View::View(Model *m, Controller *c, QWidget *parent) : QTableView(parent), model
 
 bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) {
     bool result = QTableView::edit(index, trigger, event);
-    if (result)
+    if (result) {
         // TODO: inserire formula estesa quando si entra in modifica
+    }
     return result;
 }
 

@@ -10,11 +10,10 @@ Controller::Controller(Model *m) : model(m) {
 
 void Controller::execute(const QModelIndex &index, const QString &newItemText) {
     // TODO: esaminare tutte le varie casistiche
-    QString oldItemText = model->itemFromIndex(index)->txt();
+    QString oldItemText = model->itemFromIndex(index)->text();
     if (newItemText == oldItemText)
         return;
     if (newItemText[0] == '=')
-        // TODO: spostare su Model
         createFunction(index, newItemText);
 }
 
@@ -23,5 +22,5 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     FactoryFunction factory;
     std::string code;
 
-    functions.push_back(factory.createFunction(model, factory.codeFromString(code), newItemText.toStdStr()));
+    factory.createFunction(model, factory.codeFromString(code), index, newItemText.toStdString());
 }
