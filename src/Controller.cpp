@@ -8,10 +8,6 @@
 Controller::Controller(Model *m) : model(m) {
 }
 
-void Controller::setPrevContent(const QModelIndex &index) {
-    prevItemText = model->itemFromIndex(index)->text();
-}
-
 void Controller::execute(const QString &currentItemText) {
     // TODO: esaminare tutte le varie casistiche
     if (currentItemText != prevItemText)
