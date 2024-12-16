@@ -8,15 +8,16 @@
 Controller::Controller(Model *m) : model(m) {
 }
 
-void Controller::execute(const QString &currentItemText) {
+void Controller::execute(const QModelIndex &index, const QString &newItemText) {
     // TODO: esaminare tutte le varie casistiche
-    if (currentItemText != prevItemText)
-        if (currentItemText[0] == '=')
-            createFunction();
+    QString oldItemText = model->itemFromIndex(index)->txt();
+    if (newItemText != oldItemText)
+        if (newItemText[0] == '=')
+            createFunction(index, newItemText);
     prevItemText.clear();
 }
 
-void Controller::createFunction(const QString &currentItemText) {
+void Controller::createFunction(const QModelIndex &index, const QString &newItemText) {
     FactoryFunction factory;
     std::string codeFunction;
     // TODO: implementare funzione
