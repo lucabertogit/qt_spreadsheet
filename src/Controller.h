@@ -17,7 +17,7 @@ public:
 
     void execute(const QString &currentItemText);
 
-    void createFunction(const QString &currentItemText);
+    void createFunction(const QModelIndex &index, const QString &currentItemText);
 
 private:
     Model *model;
