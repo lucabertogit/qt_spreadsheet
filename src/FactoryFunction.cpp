@@ -23,6 +23,21 @@ Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &cod
 }
 */
 
-Function * FactoryFunction::createFunction(Model *m, const std::string &formula) {
+Function * FactoryFunction::createFunction(Model *m, const CodeFunction code) {
+    switch (code) {
+        case CodeFunction::Sum:
+            return new Sum();
+        case CodeFunction::Max:
+            return new Max();
+        case CodeFunction::Min:
+            return new Min();
+        case CodeFunction::Mean:
+            return new Mean();
+        default:
+            throw std::invalid_argument("Funzione non disponibile");
+    }
+}
+
+FactoryFunction::CodeFunction FactoryFunction::getCode(const std::string &code) {
     // TODO: implementare funzione
 }

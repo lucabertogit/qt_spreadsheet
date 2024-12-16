@@ -16,7 +16,16 @@
 
 class FactoryFunction {
 public:
-    Function *createFunction(Model *m, const std::string &formula);
+    enum class CodeFunction {
+        Sum = "SUM",
+        Max = "MAX",
+        Min = "MIN",
+        Mean = "MEAN"
+    };
+
+    Function *createFunction(Model *m, const CodeFunction code);
+
+    CodeFunction getCode(const std::string &code);
 };
 
 #endif //FACTORYFUNCTION_H
