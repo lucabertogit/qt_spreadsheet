@@ -4,7 +4,7 @@
 
 #include "Function.h"
 
-Function::Function(Model *model, const std::string &formula) : extendedFormula(formula), subject(model) {
+Function::Function(Model *model, const QModelIndex &index, const std::string &formula) : extendedFormula(formula), index(index), subject(model) {
     subject->addObserver(this);
 }
 
