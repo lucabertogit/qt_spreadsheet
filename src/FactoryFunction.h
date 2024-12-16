@@ -9,23 +9,14 @@
 
 #include "Function.h"
 #include "Model.h"
-#include "Sum.h"
-#include "Max.h"
-#include "Min.h"
-#include "Mean.h"
 
 class FactoryFunction {
 public:
-    enum class CodeFunction {
-        Sum = "SUM",
-        Max = "MAX",
-        Min = "MIN",
-        Mean = "MEAN"
-    };
+    enum class CodeFunction { Sum, Max, Min, Mean };
 
-    Function *createFunction(Model *m, const CodeFunction code);
+    Function *createFunction(Model *model, CodeFunction code, const std::string &formula);
 
-    CodeFunction getCode(const std::string &code);
+    CodeFunction codeToString(const std::string &code);
 };
 
 #endif //FACTORYFUNCTION_H

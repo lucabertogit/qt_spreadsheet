@@ -6,22 +6,14 @@
 #define SUM_H
 
 #include "Function.h"
-#include "Spreadsheet.h"
-
-class Spreadsheet;
 
 class Sum : public Function {
 public:
-    Sum(Spreadsheet *s, const CellRange &r);
+    Sum(Model *model, const std::string &formula);
 
-    ~Sum() override;
+    ~Sum() override = default;
 
     void compute() override;
-
-private:
-    CellRange range;
-    Spreadsheet *subject;
-    QTableWidgetItem *item;
 };
 
 #endif //SUM_H

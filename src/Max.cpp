@@ -4,13 +4,9 @@
 
 #include "Max.h"
 
-Max::Max(Spreadsheet *s, const CellRange &r) : range(r), subject(s) {
-    subject->addObserver(this);
-}
-
-Max::~Max() {
-    subject->removeObserver(this);
+Max::Max(Model *model, const std::string &formula) : Function(model, formula) {
 }
 
 void Max::compute() {
+    // TODO: implementare funzione
 }

@@ -6,21 +6,14 @@
 #define MIN_H
 
 #include "Function.h"
-#include "Spreadsheet.h"
-
-class Spreadsheet;
 
 class Min : public Function {
 public:
-    Min(Spreadsheet *s, const CellRange &r);
+    Min(Model *model, const std::string &formula);
 
-    ~Min() override;
+    ~Min() override = default;
 
     void compute() override;
-
-private:
-    CellRange range;
-    Spreadsheet *subject;
 };
 
 #endif //MIN_H

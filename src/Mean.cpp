@@ -4,13 +4,9 @@
 
 #include "Mean.h"
 
-Mean::Mean(Spreadsheet *s, const CellRange &r) : range(r), subject(s) {
-    subject->addObserver(this);
-}
-
-Mean::~Mean() {
-    subject->removeObserver(this);
+Mean::Mean(Model *model, const std::string &formula) : Function(model, formula) {
 }
 
 void Mean::compute() {
+    // TODO: implementare funzione
 }

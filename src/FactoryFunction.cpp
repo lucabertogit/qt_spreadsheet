@@ -2,42 +2,39 @@
 // Created by lucaberto on 03/12/24.
 //
 
+#include <algorithm>
 #include "FactoryFunction.h"
+#include "Sum.h"
+#include "Max.h"
+#include "Min.h"
+#include "Mean.h"
 
-// TODO: rimuovere
-/*
-Function *FactoryFunction::createFunction(Spreadsheet *s, const std::string &codeFunction, const CellRange &range) {
-    std::string code = codeFunction;
-    toUpper(code);
-    if (code == "SUM") {
-        return new Sum(s, range);
-    } else if (code == "MAX") {
-        return new Max(s, range);
-    } else if (code == "MIN") {
-        return new Min(s, range);
-    } else if (code == "MEAN") {
-        return new Mean(s, range);
-    } else {
-        throw std::invalid_argument("Funzione non valida");
-    }
-}
-*/
-
-Function * FactoryFunction::createFunction(Model *m, const CodeFunction code) {
+Function * FactoryFunction::createFunction(Model *model, const CodeFunction code, const std::string &formula) {
     switch (code) {
         case CodeFunction::Sum:
-            return new Sum();
+            return new Sum(model, formula);
         case CodeFunction::Max:
-            return new Max();
+            return new Max(model, formula);
         case CodeFunction::Min:
-            return new Min();
+            return new Min(model, formula);
         case CodeFunction::Mean:
-            return new Mean();
+            return new Mean(model, formula);
         default:
             throw std::invalid_argument("Funzione non disponibile");
     }
 }
 
-FactoryFunction::CodeFunction FactoryFunction::getCode(const std::string &code) {
-    // TODO: implementare funzione
+FactoryFunction::CodeFunction FactoryFunction::codeToString(const std::string &code) {
+    std::string codeFunction = code;
+    std::transform(codeFunction.begin(), codeFunction.end(), codeFunction.begin(), ::toupper);
+    if (codeFunction == "SUM")
+        return CodeFunction::Sum;
+    else if (codeFunction == "MAX")
+        return CodeFunction::Max;
+    else if (codeFunction == "MIN")
+        return CodeFunction::Min;
+    else if (codeFunction == "MEAN")
+        return CodeFunction::Mean;
+    else
+        throw std::invalid_argument("Codice funzione non disponibile");
 }

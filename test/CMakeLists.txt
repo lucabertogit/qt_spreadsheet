@@ -5,11 +5,9 @@ set(GOOGLETEST_VERSION 1.15.2)
 add_subdirectory(../lib/googletest googletest)
 include_directories(../lib/googletest/include)
 
-file(GLOB TEST_SOURCES *.cpp)
+file(GLOB TEST_SOURCES runAllTests.cpp)
 
-set(PROJECT_SOURCES ../src/CellRange.cpp
-        ../src/CellRange.h
-        ../src/FactoryFunction.cpp
+set(PROJECT_SOURCES ../src/FactoryFunction.cpp
         ../src/FactoryFunction.h
         ../src/Function.cpp
         ../src/Function.h
@@ -20,8 +18,6 @@ set(PROJECT_SOURCES ../src/CellRange.cpp
         ../src/Min.cpp
         ../src/Min.h
         ../src/Observer.h
-        ../src/Spreadsheet.cpp
-        ../src/Spreadsheet.h
         ../src/Subject.h
         ../src/Sum.cpp
         ../src/Sum.h

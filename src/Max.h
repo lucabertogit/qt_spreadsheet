@@ -6,21 +6,14 @@
 #define MAX_H
 
 #include "Function.h"
-#include "Spreadsheet.h"
-
-class Spreadsheet;
 
 class Max : public Function {
 public:
-    Max(Spreadsheet *s, const CellRange &r);
+    Max(Model *model, const std::string &formula);
 
-    ~Max() override;
+    ~Max() override = default;
 
     void compute() override;
-
-private:
-    CellRange range;
-    Spreadsheet *subject;
 };
 
 #endif //MAX_H

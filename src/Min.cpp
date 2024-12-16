@@ -4,13 +4,9 @@
 
 #include "Min.h"
 
-Min::Min(Spreadsheet *s, const CellRange &r) : range(r), subject(s) {
-    subject->addObserver(this);
-}
-
-Min::~Min() {
-    subject->removeObserver(this);
+Min::Min(Model *model, const std::string &formula) : Function(model, formula) {
 }
 
 void Min::compute() {
+    // TODO: implementare funzione
 }

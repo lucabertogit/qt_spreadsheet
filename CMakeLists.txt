@@ -10,9 +10,7 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Gui Widgets)
 
-set(SOURCES src/Spreadsheet.cpp
-        src/CellRange.cpp
-        src/FactoryFunction.cpp
+set(SOURCES src/FactoryFunction.cpp
         src/Function.cpp
         src/Sum.cpp
         src/Max.cpp
@@ -24,9 +22,7 @@ set(SOURCES src/Spreadsheet.cpp
         src/MainWindow.cpp
 )
 
-set(HEADERS src/Spreadsheet.h
-        src/CellRange.h
-        src/FactoryFunction.h
+set(HEADERS src/FactoryFunction.h
         src/Function.h
         src/Observer.h
         src/Subject.h
@@ -34,7 +30,6 @@ set(HEADERS src/Spreadsheet.h
         src/Max.h
         src/Min.h
         src/Mean.h
-        src/Utility.h
         src/Controller.h
         src/View.h
         src/Model.h
