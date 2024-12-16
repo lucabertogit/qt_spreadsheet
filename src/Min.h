@@ -9,7 +9,7 @@
 
 class Min : public Function {
 public:
-    Min(Model *model, const std::string &formula);
+    Min(Model *model, const QModelIndex &index, const std::string &formula);
 
     ~Min() override = default;
 
