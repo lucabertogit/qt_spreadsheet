@@ -19,7 +19,7 @@ public:
 
     void execute(const QString &currentItemText);
 
-    void createFunction();
+    void createFunction(const QString &currentItemText);
 
 private:
     Model *model;
