@@ -9,16 +9,16 @@
 #include "Min.h"
 #include "Mean.h"
 
-Function * FactoryFunction::createFunction(Model *model, const CodeFunction code, const std::string &formula) {
+Function * FactoryFunction::createFunction(Model *model, const CodeFunction code, const QModelIndex &index, const std::string &formula) {
     switch (code) {
         case CodeFunction::Sum:
-            return new Sum(model, formula);
+            return new Sum(model, index, formula);
         case CodeFunction::Max:
-            return new Max(model, formula);
+            return new Max(model, index, formula);
         case CodeFunction::Min:
-            return new Min(model, formula);
+            return new Min(model, index, formula);
         case CodeFunction::Mean:
-            return new Mean(model, formula);
+            return new Mean(model, index, formula);
         default:
             throw std::invalid_argument("Funzione non disponibile");
     }
