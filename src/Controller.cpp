@@ -20,7 +20,7 @@ void Controller::execute(const QString &currentItemText) {
     prevItemText.clear();
 }
 
-void Controller::createFunction() {
+void Controller::createFunction(const QString &currentItemText) {
     FactoryFunction factory;
     // TODO: implementare funzione
 }
