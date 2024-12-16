@@ -15,13 +15,13 @@ void Controller::execute(const QModelIndex &index, const QString &newItemText) {
         return;
     if (newItemText[0] == '=')
         // TODO: spostare su Model
-        functions.push_back(createFunction(index, newItemText));
+        createFunction(index, newItemText);
 }
 
-Function * Controller::createFunction(const QModelIndex &index, const QString &newItemText) {
+void Controller::createFunction(const QModelIndex &index, const QString &newItemText) {
     // TODO: implementare funzione
     FactoryFunction factory;
     std::string code;
 
-    return factory.createFunction(model, factory.codeFromString(code), newItemText.toStdStr());
+    functions.push_back(factory.createFunction(model, factory.codeFromString(code), newItemText.toStdStr()));
 }
