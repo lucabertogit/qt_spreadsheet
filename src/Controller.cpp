@@ -58,9 +58,21 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
 
     FactoryFunction::CodeFunction code = factory.codeFromString(function);
 
+    sortAndSwap<char>(columnStart, columnEnd);
+    sortAndSwap<int>(rowStart, rowEnd);
+
     factory.createFunction(model, code, index, indexes, formula);
 }
 
 int Controller::columnToInt(char column) const {
     return column - 'A';
+}
+
+template<typename T>
+void Controller::sortAndSwap(T start, T end) const {
+    if (start > end) {
+        T tmp = start;
+        start = end;
+        end = tmp;
+    }
 }
