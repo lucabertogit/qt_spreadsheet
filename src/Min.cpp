@@ -4,7 +4,8 @@
 
 #include "Min.h"
 
-Min::Min(Model *model, const QModelIndex &index, const std::string &formula) : Function(model, index, formula) {
+Min::Min(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula) : Function(
+    model, index, indexes, formula) {
 }
 
 void Min::compute() {
