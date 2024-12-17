@@ -4,7 +4,8 @@
 
 #include "Max.h"
 
-Max::Max(Model *model, const QModelIndex &index, const std::string &formula) : Function(model, index, formula) {
+Max::Max(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula) : Function(
+    model, index, indexes, formula) {
 }
 
 void Max::compute() {
