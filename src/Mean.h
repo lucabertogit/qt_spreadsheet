@@ -9,7 +9,7 @@
 
 class Mean : public Function {
 public:
-    Mean(Model *model, const QModelIndex &index, const std::string &formula);
+    Mean(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula);
 
     ~Mean() override = default;
 
