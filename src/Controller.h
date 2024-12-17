@@ -19,6 +19,8 @@ public:
 
     void createFunction(const QModelIndex &index, const QString &newItemText);
 
+    int columnToInt(char column) const;
+
 private:
     Model *model;
 };
