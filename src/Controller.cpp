@@ -45,21 +45,22 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
         // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
-
-    // TODO: verificare che l'intervallo della formula non comprenda anche la cella della formula 
-    
-    CodeFunction code = factory.codeFromString(function);
     
     QModelIndexList indexes;
     for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
+            if (model->index(row, col) == index)
+                // TODO: individuare eventuale errore piu' appropriato
+                throw std::invalid_argument("Formula compresa nell'intervallo specificato");
             indexes.push_back(model->index(row, col));
         }
     }
 
+    FactoryFunction::CodeFunction code = factory.codeFromString(function);
+
     factory.createFunction(model, code, index, indexes, formula);
 }
 
-int columnToInt(char column) const {
+int Controller::columnToInt(char column) const {
     return column - 'A';
 }
