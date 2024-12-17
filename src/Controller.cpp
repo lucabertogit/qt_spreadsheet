@@ -38,11 +38,22 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
         columnEnd = matches[4].str()[0];
         rowEnd = std::stoi(matches[5].str());
     } else {
-        // TODO: individuare errore piu' appropriato
+        // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     }
-
+    
+    if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
+        // TODO: individuare eventuale errore piu' appropriato
+        throw std::invalid_argument("La stringa non corrisponde al formato atteso");
+    
     // TODO: creare QModelIndexList che dovrà essere passato come parametro
+    QModelIndexList indexes;
+    for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
+        for (int col = intToColumn(columnStart); col <= intToColumn(columnEnd); ++col) {
+            QModelIndex index;
+            indexes.append(index.sibling(row, col));
+        }
+    }
 
     factory.createFunction(model, factory.codeFromString(splitFormula[1]), index, splitFormula[0]);
 }
