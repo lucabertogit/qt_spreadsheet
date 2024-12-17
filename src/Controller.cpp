@@ -45,16 +45,19 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
         // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
+
+    // TODO: verificare che l'intervallo della formula non comprenda anche la cella della formula 
     
-    // TODO: creare QModelIndexList che dovrà essere passato come parametro
+    CodeFunction code = factory.codeFromString(function);
+    
     QModelIndexList indexes;
     for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
-            indexes.append(model->index(row, col));
+            indexes.push_back(model->index(row, col));
         }
     }
 
-    factory.createFunction(model, factory.codeFromString(splitFormula[1]), index, splitFormula[0]);
+    factory.createFunction(model, code, index, indexes, formula);
 }
 
 int columnToInt(char column) const {
