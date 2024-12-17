@@ -12,7 +12,7 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(View *v, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
 
-    ~MainWindow() override = default;
+    ~MainWindow() override;
 
 private:
 };

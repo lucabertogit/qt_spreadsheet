@@ -8,3 +8,7 @@ MainWindow::MainWindow(View *v, QWidget *parent, Qt::WindowFlags flags) : QMainW
     setCentralWidget(v);
     setWindowTitle("Spreadsheet");
 }
+
+MainWindow::~MainWindow() {
+    takeCentralWidget();
+}

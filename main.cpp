@@ -4,7 +4,6 @@
 #include "src/Model.h"
 #include "src/Controller.h"
 
-// TODO: risolvere problema dei puntatori alla chiusura
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
 
@@ -12,7 +11,6 @@ int main(int argc, char **argv) {
     Controller controller(&model);
     View view(&model, &controller);
     MainWindow window(&view);
-
 
     window.show();
 
