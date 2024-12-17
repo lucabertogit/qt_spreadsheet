@@ -12,13 +12,13 @@
 Function * FactoryFunction::createFunction(Model *model, const CodeFunction code, const QModelIndex &index, QModelIndexList &indexes, const std::string &formula) {
     switch (code) {
         case CodeFunction::Sum:
-            return new Sum(model, index, formula);
+            return new Sum(model, index, indexes, formula);
         case CodeFunction::Max:
-            return new Max(model, index, formula);
+            return new Max(model, index, indexes, formula);
         case CodeFunction::Min:
-            return new Min(model, index, formula);
+            return new Min(model, index, indexes, formula);
         case CodeFunction::Mean:
-            return new Mean(model, index, formula);
+            return new Mean(model, index, indexes, formula);
         default:
             throw std::invalid_argument("Funzione non disponibile");
     }
