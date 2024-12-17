@@ -50,10 +50,13 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     QModelIndexList indexes;
     for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
-            QModelIndex index;
-            indexes.append(index.sibling(row, col));
+            indexes.append(model->index(row, col));
         }
     }
 
     factory.createFunction(model, factory.codeFromString(splitFormula[1]), index, splitFormula[0]);
+}
+
+int columnToInt(char column) const {
+    return column - 'A';
 }
