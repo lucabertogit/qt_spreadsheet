@@ -10,6 +10,7 @@
 #include "Subject.h"
 
 class Model : public QStandardItemModel, public Subject {
+    Q_OBJECT
 public:
     Model(int rows, int columns, QObject *parent = nullptr);
 

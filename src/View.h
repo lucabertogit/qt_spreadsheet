@@ -10,6 +10,7 @@
 #include "Controller.h"
 
 class View : public QTableView {
+    Q_OBJECT
 public:
     explicit View(Model *m, Controller *c, QWidget *parent = nullptr);
 
