@@ -12,7 +12,7 @@
 // TODO: capire cosa passare come argomenti nel costruttore
 class Function : public Observer {
 public:
-    Function(Model *model, const QModelIndex &index, const std::string &formula);
+    Function(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula);
 
     ~Function() override;
 
@@ -25,8 +25,9 @@ public:
     const QModelIndex &getIndex() const;
 
 private:
-    std::string extendedFormula;
     QModelIndex index;
+    QModelIndexList indexes;
+    std::string extendedFormula;
     Model *subject;
 };
 
