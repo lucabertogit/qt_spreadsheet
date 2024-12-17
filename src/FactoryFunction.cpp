@@ -9,7 +9,7 @@
 #include "Min.h"
 #include "Mean.h"
 
-Function * FactoryFunction::createFunction(Model *model, const CodeFunction code, const QModelIndex &index, const std::string &formula) {
+Function * FactoryFunction::createFunction(Model *model, const CodeFunction code, const QModelIndex &index, QModelIndexList &indexes, const std::string &formula) {
     switch (code) {
         case CodeFunction::Sum:
             return new Sum(model, index, formula);
