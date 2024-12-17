@@ -18,6 +18,19 @@ void Controller::execute(const QModelIndex &index, const QString &newItemText) {
         createFunction(index, newItemText);
 }
 
+QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) {
+    QModelIndexList result;
+    for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
+        for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
+            if (model->index(row, col) == index)
+                // TODO: individuare eventuale errore piu' appropriato
+                throw std::invalid_argument("Formula compresa nell'intervallo specificato");
+            result.push_back(model->index(row, col));
+        }
+    }
+    return result;
+}
+
 void Controller::createFunction(const QModelIndex &index, const QString &newItemText) {
     FactoryFunction factory;
     std::string formula = newItemText.toStdString();
@@ -46,15 +59,7 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
         // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     
-    QModelIndexList indexes;
-    for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
-        for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
-            if (model->index(row, col) == index)
-                // TODO: individuare eventuale errore piu' appropriato
-                throw std::invalid_argument("Formula compresa nell'intervallo specificato");
-            indexes.push_back(model->index(row, col));
-        }
-    }
+    QModelIndexList indexes = setIndexes(columnStart, columnEnd, rowStart, rowEnd, index);
 
     FactoryFunction::CodeFunction code = factory.codeFromString(function);
 

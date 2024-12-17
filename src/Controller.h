@@ -15,6 +15,8 @@ public:
 
     void execute(const QModelIndex &index, const QString &newItemText);
 
+    QModelIndexList setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index);
+
     void createFunction(const QModelIndex &index, const QString &newItemText);
 
     int columnToInt(char column) const;
