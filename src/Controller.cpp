@@ -49,7 +49,7 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     // TODO: creare QModelIndexList che dovrà essere passato come parametro
     QModelIndexList indexes;
     for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
-        for (int col = intToColumn(columnStart); col <= intToColumn(columnEnd); ++col) {
+        for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
             QModelIndex index;
             indexes.append(index.sibling(row, col));
         }
