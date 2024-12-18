@@ -6,7 +6,9 @@ add_subdirectory(../lib/googletest googletest)
 include_directories(../lib/googletest/include)
 
 file(GLOB TEST_SOURCES runAllTests.cpp
-        MainWindowTest.cpp)
+        MainWindowTest.cpp
+        FactoryFunctionTest.cpp
+)
 
 set(PROJECT_SOURCES ../src/FactoryFunction.cpp
         ../src/FactoryFunction.h

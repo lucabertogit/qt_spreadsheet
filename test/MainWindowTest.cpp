@@ -12,4 +12,6 @@ TEST(MainWindow, TestCostructor) {
     MainWindow window(&view);
 
     ASSERT_EQ(window.windowTitle(), "Spreadsheet");
+
+    // TODO: eventualmente controllare centralWidget
 }
