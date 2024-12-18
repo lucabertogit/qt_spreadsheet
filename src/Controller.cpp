@@ -47,9 +47,9 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     if (std::regex_match(formula, matches, pattern)) {
         function = matches[1];
         columnStart = matches[2].str()[0];
-        rowStart = std::stoi(matches[3].str());
+        rowStart = std::stoi(matches[3].str()) - 1;
         columnEnd = matches[4].str()[0];
-        rowEnd = std::stoi(matches[5].str());
+        rowEnd = std::stoi(matches[5].str()) - 1;
     } else {
         // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
