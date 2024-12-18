@@ -9,17 +9,9 @@ Sum::Sum(Model *model, const QModelIndex &index, const QModelIndexList &indexes,
 }
 
 void Sum::compute() {
-    // TODO: modificare a seguito delle variazioni effettuate
-}
-
-/*
-void Sum::compute() {
     double sum = 0;
-    for (int col = range.getStartColumn(); col <= range.getEndColumn(); col++) {
-        for (int row = range.getStartRow(); row <= range.getEndRow(); row++) {
-            sum += subject->getTable().item(row, col)->text().toDouble();
-        }
+    for (const auto& index : indexes) {
+        sum += subject->itemFromIndex(index)->text().toDouble();
     }
-    item->setText(QString::number(sum));
+    subject->itemFromIndex(index)->setText(QString::number(sum));
 }
-*/
