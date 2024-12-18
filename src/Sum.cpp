@@ -10,7 +10,7 @@ Sum::Sum(Model *model, const QModelIndex &index, const QModelIndexList &indexes,
 
 void Sum::compute() {
     double sum = 0;
-    for (const auto& index : indexes) {
+    for (const auto &index: indexes) {
         sum += subject->itemFromIndex(index)->text().toDouble();
     }
     subject->itemFromIndex(index)->setText(QString::number(sum));
