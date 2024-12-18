@@ -32,3 +32,65 @@ TEST(FactoryFunction, TestCreateFunction) {
     ASSERT_EQ(typeid(*function), typeid(Sum));
     delete function;
 }
+
+TEST(FactoryFunction, TestCodeFromString) {
+    FactoryFunction factory;
+
+    std::string codeFunction = "MAX";
+    FactoryFunction::CodeFunction code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Max);
+
+    codeFunction = "max";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Max);
+
+    codeFunction = "mAX";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Max);
+
+    codeFunction = "MEAN";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Mean);
+
+    codeFunction = "mean";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Mean);
+
+    codeFunction = "Mean";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Mean);
+
+    codeFunction = "MIN";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Min);
+
+    codeFunction = "min";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Min);
+
+    codeFunction = "MiN";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Min);
+
+    codeFunction = "SUM";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Sum);
+
+    codeFunction = "sum";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Sum);
+
+    codeFunction = "sUm";
+    code = factory.codeFromString(codeFunction);
+    ASSERT_EQ(code, FactoryFunction::CodeFunction::Sum);
+
+    try {
+        codeFunction = "SOMMA";
+        code = factory.codeFromString(codeFunction);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("Codice funzione non disponibile"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezione";
+    }
+}
