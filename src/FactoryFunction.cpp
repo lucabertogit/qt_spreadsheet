@@ -19,9 +19,8 @@ Function * FactoryFunction::createFunction(Model *model, const CodeFunction code
             return new Min(model, index, indexes, formula);
         case CodeFunction::Mean:
             return new Mean(model, index, indexes, formula);
-        default:
-            throw std::invalid_argument("Funzione non disponibile");
     }
+    return nullptr;
 }
 
 FactoryFunction::CodeFunction FactoryFunction::codeFromString(const std::string &code) {
@@ -36,5 +35,6 @@ FactoryFunction::CodeFunction FactoryFunction::codeFromString(const std::string 
     else if (codeFunction == "MEAN")
         return CodeFunction::Mean;
     else
+        // TODO: individuare eventualmente altra eccezione
         throw std::invalid_argument("Codice funzione non disponibile");
 }
