@@ -24,7 +24,7 @@ public:
 
     const QModelIndex &getIndex() const;
 
-private:
+protected:
     QModelIndex index;
     QModelIndexList indexes;
     std::string extendedFormula;
