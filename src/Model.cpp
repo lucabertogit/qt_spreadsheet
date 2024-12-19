@@ -20,10 +20,6 @@ void Model::addObserver(Observer *o) {
     observers.push_back(o);
 }
 
-Model::~Model() {
-    // TODO: liberare memoria se sulla lista degli osservatori contiene oggetti
-}
-
 void Model::removeObserver(Observer *o) {
     observers.remove(o);
 }
