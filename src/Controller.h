@@ -24,6 +24,8 @@ public:
     template <typename T>
     void sortAndSwap(T start, T end) const;
 
+    void deleteFunction(const QModelIndex &index);
+
 private:
     Model *model;
 };
