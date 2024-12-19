@@ -14,7 +14,7 @@ class Model : public QStandardItemModel, public Subject {
 public:
     Model(int rows, int columns, QObject *parent = nullptr);
 
-    ~Model() override = default;
+    ~Model() override;
 
     void addObserver(Observer *o) override;
 
