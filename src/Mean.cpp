@@ -10,5 +10,12 @@ Mean::Mean(Model *model, const QModelIndex &index, const QModelIndexList &indexe
 }
 
 void Mean::compute() {
-    // TODO: implementare funzione
+    double sum = 0;
+    int countElement = 0;
+    for (const auto &index: indexes) {
+        countElement++;
+        sum += subject->itemFromIndex(index)->text().toDouble();
+    }
+    double mean = sum / countElement;
+    subject->itemFromIndex(index)->setText(QString::number(mean));
 }
