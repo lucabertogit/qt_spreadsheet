@@ -26,6 +26,8 @@ public:
 
     void deleteFunction(const QModelIndex &index);
 
+    void deleteAllFunction();
+
 private:
     Model *model;
 };

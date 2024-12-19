@@ -20,6 +20,10 @@ bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger
     return result;
 }
 
+void View::quit() {
+    controller->deleteAllFunction();
+}
+
 void View::commitData(QWidget *editor) {
     if (auto *lineEdit = qobject_cast<QLineEdit *>(editor)) {
         QModelIndex index = currentIndex();

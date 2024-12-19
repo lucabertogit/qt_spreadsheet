@@ -91,3 +91,12 @@ void Controller::deleteFunction(const QModelIndex &index) {
             delete function;
     }
 }
+
+void Controller::deleteAllFunction() {
+    while (model->countObserver() > 0) {
+        Observer *observer = model->getObserver();
+        Function *function = dynamic_cast<Function *>(observer);
+        if (function)
+            delete function;
+    }
+}

@@ -24,6 +24,10 @@ public:
 
     Observer *getObserver(const QModelIndex &index);
 
+    Observer *getObserver();
+
+    int countObserver() const;
+
 protected slots:
     void onItemChanged(QStandardItem *item);
 

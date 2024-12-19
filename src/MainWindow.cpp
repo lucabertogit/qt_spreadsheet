@@ -14,6 +14,8 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    // TODO: free memory Function
+    View *view = dynamic_cast<View *>(centralWidget());
+    if (view)
+        view->quit();
     QMainWindow::closeEvent(event);
 }

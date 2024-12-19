@@ -42,6 +42,14 @@ Observer *Model::getObserver(const QModelIndex &index) {
     return nullptr;
 }
 
+Observer * Model::getObserver() {
+    return observers.front();
+}
+
+int Model::countObserver() const {
+    return observers.size();
+}
+
 void Model::onItemChanged(QStandardItem *item) {
     notify();
 }
