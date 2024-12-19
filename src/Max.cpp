@@ -9,5 +9,10 @@ Max::Max(Model *model, const QModelIndex &index, const QModelIndexList &indexes,
 }
 
 void Max::compute() {
-    // TODO: implementare funzione
+    QModelIndex max = indexes[0];
+    for (const auto &index : indexes) {
+        if (subject->itemFromIndex(index)->text().toDouble > subject->itemFromIndex(max)->text().toDouble)
+            max = index;
+    }
+    subject->itemFromIndex(index)->setText(subject->itemFromIndex(max).text());
 }
