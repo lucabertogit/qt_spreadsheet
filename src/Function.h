@@ -9,7 +9,6 @@
 #include "Observer.h"
 #include "Model.h"
 
-// TODO: capire cosa passare come argomenti nel costruttore
 class Function : public Observer {
 public:
     Function(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula);
@@ -23,6 +22,8 @@ public:
     const std::string &getExtendedFormula() const;
 
     const QModelIndex &getIndex() const;
+
+    bool isFunction(const QModelIndex &index);
 
 protected:
     QModelIndex index;

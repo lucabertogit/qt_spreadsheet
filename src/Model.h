@@ -22,6 +22,8 @@ public:
 
     void notify() override;
 
+    Observer *getObserver(const QModelIndex &index);
+
 protected slots:
     void onItemChanged(QStandardItem *item);
 

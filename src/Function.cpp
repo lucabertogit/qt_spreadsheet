@@ -22,6 +22,12 @@ const QModelIndex &Function::getIndex() const {
     return index;
 }
 
+bool Function::isFunction(const QModelIndex &index) {
+    if (this->index == index)
+        return true;
+    return false;
+}
+
 void Function::update() {
     compute();
 }

@@ -3,6 +3,7 @@
 //
 
 #include "Model.h"
+#include "Function.h"
 
 Model::Model(int rows, int columns, QObject *parent) : QStandardItemModel(rows, columns, parent) {
     QStringList horizontalLabels;
@@ -27,6 +28,18 @@ void Model::removeObserver(Observer *o) {
 void Model::notify() {
     for (const auto observer: observers)
         observer->update();
+}
+
+Observer *Model::getObserver(const QModelIndex &index) {
+    bool found = false;
+    for (auto observer : observers) {
+        Function *function = dynamic_cast<Function *>(observer);
+        if (function)
+            found = function->isFunction(index);
+        if (found)
+            return observer;
+    }
+    return nullptr;
 }
 
 void Model::onItemChanged(QStandardItem *item) {

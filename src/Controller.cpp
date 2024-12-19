@@ -87,5 +87,8 @@ void Controller::sortAndSwap(T start, T end) const {
 }
 
 void Controller::deleteFunction(const QModelIndex &index) {
-    // TODO: cancellare funzione sulla cella
+    if (Observer *observer = model->getObserver(index)) {
+        if (Function *function = dynamic_cast<Function *>(observer))
+            delete function;
+    }
 }
