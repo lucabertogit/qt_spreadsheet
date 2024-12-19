@@ -9,5 +9,10 @@ Min::Min(Model *model, const QModelIndex &index, const QModelIndexList &indexes,
 }
 
 void Min::compute() {
-    // TODO: implementare funzione
+    QModelIndex min = indexes[0];
+    for (const auto &index : indexes) {
+        if (subject->itemFromIndex(index)->text().toDouble < subject->itemFromIndex(max)->text().toDouble)
+            min = index;
+    }
+    subject->itemFromIndex(index)->setText(subject->itemFromIndex(min).text());
 }
