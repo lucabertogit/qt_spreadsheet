@@ -9,6 +9,7 @@
 #include "Model.h"
 #include "Controller.h"
 
+// TODO: valutare di utilizzare QTableWidget
 class View : public QTableView {
     Q_OBJECT
 public:

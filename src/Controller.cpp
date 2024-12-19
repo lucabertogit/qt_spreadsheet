@@ -14,16 +14,16 @@ void Controller::execute(const QModelIndex &index, const QString &newItemText) {
     if (newItemText == oldItemText)
         return;
     
-    if (oldItemText[0] == '=')
+    if (oldItemText.length() > 0 && oldItemText[0] == '=')
         deleteFunction(index);
     
-    if (newItemText[0] == '=')
+    if (newItemText.length() > 0 && newItemText[0] == '=')
         createFunction(index, newItemText);
 }
 
 QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) {
     QModelIndexList result;
-    for (int row = rowStart; rowStart <= rowEnd; ++rowStart) {
+    for (int row = rowStart; row <= rowEnd; ++row) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
             if (model->index(row, col) == index)
                 // TODO: individuare eventuale errore piu' appropriato
