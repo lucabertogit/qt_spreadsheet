@@ -10,7 +10,6 @@ Controller::Controller(Model *m) : model(m) {
 }
 
 void Controller::execute(const QModelIndex &index, const QString &newItemText) {
-    // TODO: esaminare tutte le varie casistiche
     QString oldItemText = model->itemFromIndex(index)->text();
     if (newItemText == oldItemText)
         return;
