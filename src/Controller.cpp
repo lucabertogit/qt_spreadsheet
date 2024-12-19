@@ -14,6 +14,10 @@ void Controller::execute(const QModelIndex &index, const QString &newItemText) {
     QString oldItemText = model->itemFromIndex(index)->text();
     if (newItemText == oldItemText)
         return;
+    
+    if (oldItemText[0] == '=')
+        deleteFunction(index);
+    
     if (newItemText[0] == '=')
         createFunction(index, newItemText);
 }
