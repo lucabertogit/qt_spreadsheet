@@ -85,3 +85,7 @@ void Controller::sortAndSwap(T start, T end) const {
         end = tmp;
     }
 }
+
+void Controller::deleteFunction(const QModelIndex &index) {
+    // TODO: cancellare funzione sulla cella
+}
