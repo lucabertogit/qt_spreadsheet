@@ -14,6 +14,9 @@ public:
 
     ~MainWindow() override;
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private:
 };
 

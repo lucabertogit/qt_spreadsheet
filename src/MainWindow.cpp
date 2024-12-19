@@ -12,3 +12,8 @@ MainWindow::MainWindow(View *v, QWidget *parent, Qt::WindowFlags flags) : QMainW
 MainWindow::~MainWindow() {
     takeCentralWidget();
 }
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    // TODO: free memory Function
+    QMainWindow::closeEvent(event);
+}
