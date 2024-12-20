@@ -26,8 +26,8 @@ const QModelIndex &Function::getIndex() const {
     return index;
 }
 
-bool Function::isFunction(const QModelIndex &index) {
-    if (this->index == index)
+bool Function::thereIsFunction(const QModelIndex &index) {
+    if (this->index.row() == index.row() && this->index.column() == index.column())
         return true;
     return false;
 }

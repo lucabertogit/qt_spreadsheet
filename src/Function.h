@@ -23,7 +23,7 @@ public:
 
     const QModelIndex &getIndex() const;
 
-    bool isFunction(const QModelIndex &index);
+    bool thereIsFunction(const QModelIndex &index);
 
 protected:
     QModelIndex index;
