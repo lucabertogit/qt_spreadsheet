@@ -25,8 +25,12 @@ void Controller::execute(const QModelIndex &index, QWidget *editor) const {
     if (oldItemText.length() > 0 && oldItemText[0] == '=')
         deleteFunction(index);
     
-    if (newItemText.length() > 0 && newItemText[0] == '=')
-        createFunction(index, newItemText);
+    try {
+        if (newItemText.length() > 0 && newItemText[0] == '=')
+            createFunction(index, newItemText);
+    } catch (std::invalid_argument &e) {
+        model->itemFromIndex(index)->setText("#NOME?");
+    }
 }
 
 QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const {

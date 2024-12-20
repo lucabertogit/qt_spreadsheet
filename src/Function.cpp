@@ -2,7 +2,6 @@
 // Created by lucaberto on 02/12/24.
 //
 
-// TODO: rimuovere include?
 #include <iostream>
 #include "Function.h"
 
