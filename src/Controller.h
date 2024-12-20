@@ -13,22 +13,22 @@ public:
 
     ~Controller() = default;
 
-    void execute(const QModelIndex &index, const QString &newItemText);
+    void execute(const QModelIndex &index, QWidget *editor) const;
 
-    QModelIndexList setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index);
+    QModelIndexList setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const;
 
-    void createFunction(const QModelIndex &index, const QString &newItemText);
+    void createFunction(const QModelIndex &index, const QString &newItemText) const;
 
     int columnToInt(char column) const;
 
     template <typename T>
     void sortAndSwap(T start, T end) const;
 
-    void deleteFunction(const QModelIndex &index);
+    void deleteFunction(const QModelIndex &index) const;
 
-    void deleteAllFunction();
+    void deleteAllFunction() const;
 
-    void writeExtendedFormula(const QModelIndex &index);
+    void printExtendedFormula(const QModelIndex &index, QWidget *editor) const;
 
 private:
     Model *model;

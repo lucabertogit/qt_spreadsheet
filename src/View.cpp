@@ -17,15 +17,15 @@ void View::quit() {
 }
 
 bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) {
-    // TODO: modificare testo cella con formula estesa stando attenti che in caso di variazione viene inviato il segnale
-    return QTableView::edit(index, trigger, event);
+    bool result = QTableView::edit(index, trigger, event);
+    if (result) {
+        controller->printExtendedFormula(index, indexWidget(index));;
+    }
+    return result;
 }
 
 void View::commitData(QWidget *editor) {
-    if (auto *lineEdit = qobject_cast<QLineEdit *>(editor)) {
-        QModelIndex index = currentIndex();
-        QString currentText = lineEdit->text();
-        controller->execute(index, currentText);
-    }
+    QModelIndex index = currentIndex();
+    controller->execute(index, editor);
     QTableView::commitData(editor);
 }

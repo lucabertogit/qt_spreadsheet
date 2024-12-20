@@ -3,14 +3,22 @@
 //
 
 #include <regex>
+#include <QLineEdit>
 #include "Controller.h"
 #include "FactoryFunction.h"
 
 Controller::Controller(Model *m) : model(m) {
 }
 
-void Controller::execute(const QModelIndex &index, const QString &newItemText) {
-    QString oldItemText = model->itemFromIndex(index)->text();
+void Controller::execute(const QModelIndex &index, QWidget *editor) const {
+    Function *function = dynamic_cast<Function *>(model->getObserver(index));
+    QString oldItemText;
+    if (function)
+        oldItemText = QString::fromStdString(function->getExtendedFormula());
+    else
+        oldItemText = model->itemFromIndex(index)->text();
+    QLineEdit *editorCell = qobject_cast<QLineEdit *>(editor);
+    QString newItemText = editorCell->text();
     if (newItemText == oldItemText)
         return;
     
@@ -21,7 +29,7 @@ void Controller::execute(const QModelIndex &index, const QString &newItemText) {
         createFunction(index, newItemText);
 }
 
-QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) {
+QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const {
     QModelIndexList result;
     for (int row = rowStart; row <= rowEnd; ++row) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
@@ -34,7 +42,7 @@ QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int row
     return result;
 }
 
-void Controller::createFunction(const QModelIndex &index, const QString &newItemText) {
+void Controller::createFunction(const QModelIndex &index, const QString &newItemText) const {
     FactoryFunction factory;
     std::string formula = newItemText.toStdString();
     std::transform(formula.begin(), formula.end(), formula.begin(), ::toupper);
@@ -85,24 +93,22 @@ void Controller::sortAndSwap(T start, T end) const {
     }
 }
 
-void Controller::deleteFunction(const QModelIndex &index) {
-    if (Observer *observer = model->getObserver(index)) {
-        if (Function *function = dynamic_cast<Function *>(observer))
-            delete function;
-    }
+void Controller::deleteFunction(const QModelIndex &index) const {
+    Observer *observer = model->getObserver(index);
+    delete observer;
 }
 
-void Controller::deleteAllFunction() {
+void Controller::deleteAllFunction() const {
     while (model->countObserver() > 0) {
         Observer *observer = model->getObserver();
-        Function *function = dynamic_cast<Function *>(observer);
-        if (function)
-            delete function;
+        delete observer;;
     }
 }
 
-void Controller::writeExtendedFormula(const QModelIndex &index) {
+void Controller::printExtendedFormula(const QModelIndex &index, QWidget *editor) const {
     Function *function = dynamic_cast<Function *>(model->getObserver(index));
-    if (function)
-        model->itemFromIndex(index)->setText(QString::fromStdString(function->getExtendedFormula()));
+    if (function) {
+        auto *editorCell = qobject_cast<QLineEdit *>(editor);
+        editorCell->setText(QString::fromStdString(function->getExtendedFormula()));
+    }
 }
