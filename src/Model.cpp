@@ -31,12 +31,9 @@ void Model::notify() {
 }
 
 Observer *Model::getObserver(const QModelIndex &index) {
-    bool found = false;
     for (auto observer : observers) {
         Function *function = dynamic_cast<Function *>(observer);
-        if (function)
-            found = function->isFunction(index);
-        if (found)
+        if (function && function->thereIsFunction(index))
             return observer;
     }
     return nullptr;
