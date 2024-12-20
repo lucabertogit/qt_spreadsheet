@@ -12,16 +12,13 @@ View::View(Model *m, Controller *c, QWidget *parent) : QTableView(parent), model
     setCurrentIndex(model->indexFromItem(model->item(0, 0)));
 }
 
-bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) {
-    bool result = QTableView::edit(index, trigger, event);
-    if (result) {
-        // TODO: inserire formula estesa quando si entra in modifica
-    }
-    return result;
-}
-
 void View::quit() {
     controller->deleteAllFunction();
+}
+
+bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) {
+    // TODO: modificare testo cella con formula estesa stando attenti che in caso di variazione viene inviato il segnale
+    return QTableView::edit(index, trigger, event);
 }
 
 void View::commitData(QWidget *editor) {

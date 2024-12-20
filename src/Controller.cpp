@@ -100,3 +100,9 @@ void Controller::deleteAllFunction() {
             delete function;
     }
 }
+
+void Controller::writeExtendedFormula(const QModelIndex &index) {
+    Function *function = dynamic_cast<Function *>(model->getObserver(index));
+    if (function)
+        model->itemFromIndex(index)->setText(QString::fromStdString(function->getExtendedFormula()));
+}

@@ -28,6 +28,8 @@ public:
 
     void deleteAllFunction();
 
+    void writeExtendedFormula(const QModelIndex &index);
+
 private:
     Model *model;
 };

@@ -9,7 +9,7 @@
 #include "Model.h"
 #include "Controller.h"
 
-// TODO: valutare di utilizzare QTableWidget
+// TODO: valutare di utilizzare QTableWidget e gestire eccezioni
 class View : public QTableView {
     Q_OBJECT
 public:
