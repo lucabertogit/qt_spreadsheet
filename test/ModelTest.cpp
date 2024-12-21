@@ -4,6 +4,10 @@
 
 #include "gtest/gtest.h"
 #include "../src/Model.h"
+#include "../src/Controller.h"
+#include "../src/View.h"
+#include "../src/Sum.h"
+#include "../src/Max.h"
 
 TEST(Model, TestCostructor) {
     Model model;
@@ -69,4 +73,100 @@ TEST(Model, TestCostructor) {
 
     header = model.verticalHeaderItem(9);
     ASSERT_EQ(header->text().toInt(), 10);
+}
+
+TEST(Model, TestAddObserver) {
+    Model model;
+    Controller controller(&model);
+    View view(&model, &controller);
+
+    QModelIndex index1 = model.index(3, 0);
+    QModelIndexList range1;
+    range1.push_back(model.index(0, 0));
+    range1.push_back(model.index(1, 0));
+    range1.push_back(model.index(2, 0));
+    Sum sumFormula(&model, index1, range1, "=SUM(A1:A3)");
+    ASSERT_EQ(model.countObserver(), 1);
+
+    QModelIndex index2 = model.index(3, 1);
+    QModelIndexList range2;
+    range1.push_back(model.index(0, 1));
+    range1.push_back(model.index(1, 1));
+    range1.push_back(model.index(2, 1));
+    Max maxFormula(&model, index2, range2, "=MAX(B1:B3)");
+    ASSERT_EQ(model.countObserver(), 2);
+}
+
+TEST(Model, TestRemoveObserver) {
+    Model model;
+    Controller controller(&model);
+    View view(&model, &controller);
+
+    QModelIndex index1 = model.index(3, 0);
+    QModelIndexList range1;
+    range1.push_back(model.index(0, 0));
+    range1.push_back(model.index(1, 0));
+    range1.push_back(model.index(2, 0));
+    Sum sumFormula(&model, index1, range1, "=SUM(A1:A3)");
+
+    QModelIndex index2 = model.index(3, 1);
+    QModelIndexList range2;
+    range1.push_back(model.index(0, 1));
+    range1.push_back(model.index(1, 1));
+    range1.push_back(model.index(2, 1));
+    Max maxFormula(&model, index2, range2, "=MAX(B1:B3)");
+
+    model.removeObserver(&sumFormula);
+    ASSERT_EQ(model.countObserver(), 1);
+
+    model.removeObserver(&maxFormula);
+    ASSERT_EQ(model.countObserver(), 0);
+}
+
+TEST(Model, TestGetObserver) {
+    Model model;
+    Controller controller(&model);
+    View view(&model, &controller);
+
+    QModelIndex index1 = model.index(3, 0);
+    QModelIndexList range1;
+    range1.push_back(model.index(0, 0));
+    range1.push_back(model.index(1, 0));
+    range1.push_back(model.index(2, 0));
+    Sum sumFormula(&model, index1, range1, "=SUM(A1:A3)");
+
+    QModelIndex index2 = model.index(3, 1);
+    QModelIndexList range2;
+    range1.push_back(model.index(0, 1));
+    range1.push_back(model.index(1, 1));
+    range1.push_back(model.index(2, 1));
+    Max maxFormula(&model, index2, range2, "=MAX(B1:B3)");
+
+    Observer *observer = model.getObserver();
+    ASSERT_EQ(observer, &sumFormula);
+    ASSERT_NE(observer, &maxFormula);
+}
+
+TEST(Model, TestGetObserverIndex) {
+    Model model;
+    Controller controller(&model);
+    View view(&model, &controller);
+
+    QModelIndex index1 = model.index(3, 0);
+    QModelIndexList range1;
+    range1.push_back(model.index(0, 0));
+    range1.push_back(model.index(1, 0));
+    range1.push_back(model.index(2, 0));
+    Sum sumFormula(&model, index1, range1, "=SUM(A1:A3)");
+
+    QModelIndex index2 = model.index(3, 1);
+    QModelIndexList range2;
+    range1.push_back(model.index(0, 1));
+    range1.push_back(model.index(1, 1));
+    range1.push_back(model.index(2, 1));
+    Max maxFormula(&model, index2, range2, "=MAX(B1:B3)");
+
+    Observer *observer = model.getObserver(index2);
+    ASSERT_NE(observer, &sumFormula);
+    ASSERT_EQ(observer, &maxFormula);
 }
