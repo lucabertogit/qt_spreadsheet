@@ -4,13 +4,13 @@
 
 #include "Sum.h"
 
-Sum::Sum(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula) : Function(
-    model, index, indexes, formula) {
+Sum::Sum(Model *model, const QModelIndex &index, const QModelIndexList &range, const std::string &formula) : Function(
+    model, index, range, formula) {
 }
 
 void Sum::compute() {
     double sum = 0;
-    for (const auto &index: indexes) {
+    for (const auto &index: range) {
         sum += subject->itemFromIndex(index)->text().toDouble();
     }
     subject->itemFromIndex(index)->setText(QString::number(sum));

@@ -4,15 +4,15 @@
 
 #include "Mean.h"
 
-Mean::Mean(Model *model, const QModelIndex &index, const QModelIndexList &indexes,
+Mean::Mean(Model *model, const QModelIndex &index, const QModelIndexList &range,
            const std::string &formula) : Function(
-    model, index, indexes, formula) {
+    model, index, range, formula) {
 }
 
 void Mean::compute() {
     double sum = 0;
     int countElement = 0;
-    for (const auto &index: indexes) {
+    for (const auto &index: range) {
         countElement++;
         sum += subject->itemFromIndex(index)->text().toDouble();
     }

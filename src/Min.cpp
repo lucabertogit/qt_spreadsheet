@@ -4,13 +4,13 @@
 
 #include "Min.h"
 
-Min::Min(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula) : Function(
-    model, index, indexes, formula) {
+Min::Min(Model *model, const QModelIndex &index, const QModelIndexList &range, const std::string &formula) : Function(
+    model, index, range, formula) {
 }
 
 void Min::compute() {
-    QModelIndex min = indexes[0];
-    for (const auto &index : indexes) {
+    QModelIndex min = range[0];
+    for (const auto &index : range) {
         if (subject->itemFromIndex(index)->text().toDouble() < subject->itemFromIndex(min)->text().toDouble())
             min = index;
     }

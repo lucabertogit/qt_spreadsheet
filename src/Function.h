@@ -11,7 +11,7 @@
 
 class Function : public Observer {
 public:
-    Function(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula);
+    Function(Model *model, const QModelIndex &index, const QModelIndexList &range, const std::string &formula);
 
     ~Function() override;
 
@@ -27,7 +27,7 @@ public:
 
 protected:
     QModelIndex index;
-    QModelIndexList indexes;
+    QModelIndexList range;
     std::string extendedFormula;
     Model *subject;
 };
