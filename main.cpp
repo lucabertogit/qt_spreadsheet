@@ -4,6 +4,8 @@
 #include "src/Model.h"
 #include "src/Controller.h"
 
+// TODO: migliorare gestione eccezioni anche creandone alcune specifiche
+// TODO: il controller non deve impostare la view, ev. la view puo' richiamare direttamente il model
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
 

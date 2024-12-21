@@ -38,7 +38,6 @@ QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int row
     for (int row = rowStart; row <= rowEnd; ++row) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
             if (model->index(row, col) == index)
-                // TODO: individuare eventuale errore piu' appropriato
                 throw std::invalid_argument("Formula compresa nell'intervallo specificato");
             result.push_back(model->index(row, col));
         }
