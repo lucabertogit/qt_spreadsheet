@@ -7,7 +7,7 @@
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
 
-    Model model(10, 10);
+    Model model;
     Controller controller(&model);
     View view(&model, &controller);
     MainWindow window(&view);
