@@ -33,7 +33,7 @@ void Controller::execute(const QModelIndex &index, QWidget *editor) const {
     }
 }
 
-QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const {
+QModelIndexList Controller::setRange(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const {
     QModelIndexList result;
     for (int row = rowStart; row <= rowEnd; ++row) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
@@ -71,14 +71,14 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     
-    QModelIndexList indexes = setIndexes(columnStart, columnEnd, rowStart, rowEnd, index);
+    QModelIndexList range = setRange(columnStart, columnEnd, rowStart, rowEnd, index);
 
     FactoryFunction::CodeFunction code = factory.codeFromString(function);
 
     sortAndSwap<char>(columnStart, columnEnd);
     sortAndSwap<int>(rowStart, rowEnd);
 
-    factory.createFunction(model, code, index, indexes, formula);
+    factory.createFunction(model, code, index, range, formula);
 }
 
 int Controller::columnToInt(char column) const {
