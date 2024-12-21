@@ -38,7 +38,6 @@ QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int row
     for (int row = rowStart; row <= rowEnd; ++row) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
             if (model->index(row, col) == index)
-                // TODO: individuare eventuale errore piu' appropriato
                 throw std::invalid_argument("Formula compresa nell'intervallo specificato");
             result.push_back(model->index(row, col));
         }
@@ -66,12 +65,10 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
         columnEnd = matches[4].str()[0];
         rowEnd = std::stoi(matches[5].str()) - 1;
     } else {
-        // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     }
     
     if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
-        // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     
     QModelIndexList indexes = setIndexes(columnStart, columnEnd, rowStart, rowEnd, index);

@@ -35,6 +35,5 @@ FactoryFunction::CodeFunction FactoryFunction::codeFromString(const std::string 
     else if (codeFunction == "MEAN")
         return CodeFunction::Mean;
     else
-        // TODO: individuare eventualmente altra eccezione
         throw std::invalid_argument("Codice funzione non disponibile");
 }
