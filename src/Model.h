@@ -12,7 +12,7 @@
 class Model : public QStandardItemModel, public Subject {
     Q_OBJECT
 public:
-    Model(int rows, int columns, QObject *parent = nullptr);
+    explicit Model(QObject *parent = nullptr);
 
     ~Model() override = default;
 
@@ -22,11 +22,12 @@ public:
 
     void notify() override;
 
-    Observer *getObserver(const QModelIndex &index);
+    int countObserver() const;
 
     Observer *getObserver();
 
-    int countObserver() const;
+    Observer *getObserver(const QModelIndex &index);
+
 
 protected slots:
     void onItemChanged(QStandardItem *item);

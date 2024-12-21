@@ -6,7 +6,7 @@
 #include "../src/MainWindow.h"
 
 TEST(MainWindow, TestCostructor) {
-    Model model(10, 10);
+    Model model;
     Controller controller(&model);
     View view(&model, &controller);
     MainWindow window(&view);

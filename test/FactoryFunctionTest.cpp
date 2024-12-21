@@ -10,7 +10,7 @@
 #include "../src/Sum.h"
 
 TEST(FactoryFunction, TestCreateFunction) {
-    Model model(10, 10);
+    Model model;
     QModelIndex index;
     QModelIndexList indexes;
     std::string formula = "formula";

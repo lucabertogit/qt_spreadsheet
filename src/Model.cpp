@@ -5,7 +5,7 @@
 #include "Model.h"
 #include "Function.h"
 
-Model::Model(int rows, int columns, QObject *parent) : QStandardItemModel(rows, columns, parent) {
+Model::Model(QObject *parent) : QStandardItemModel(10, 10, parent) {
     QStringList horizontalLabels;
     QStringList verticalLabels;
     for (int column = 0; column < QStandardItemModel::columnCount(); ++column)
@@ -30,6 +30,14 @@ void Model::notify() {
         observer->update();
 }
 
+int Model::countObserver() const {
+    return observers.size();
+}
+
+Observer *Model::getObserver() {
+    return observers.front();
+}
+
 Observer *Model::getObserver(const QModelIndex &index) {
     for (auto observer : observers) {
         Function *function = dynamic_cast<Function *>(observer);
@@ -37,14 +45,6 @@ Observer *Model::getObserver(const QModelIndex &index) {
             return observer;
     }
     return nullptr;
-}
-
-Observer * Model::getObserver() {
-    return observers.front();
-}
-
-int Model::countObserver() const {
-    return observers.size();
 }
 
 void Model::onItemChanged(QStandardItem *item) {
