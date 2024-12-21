@@ -6,21 +6,14 @@
 #define MEAN_H
 
 #include "Function.h"
-#include "Spreadsheet.h"
-
-class Spreadsheet;
 
 class Mean : public Function {
 public:
-    Mean(Spreadsheet *s, const CellRange &r);
+    Mean(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula);
 
-    ~Mean() override;
+    ~Mean() override = default;
 
     void compute() override;
-
-private:
-    CellRange range;
-    Spreadsheet *subject;
 };
 
 #endif //MEAN_H

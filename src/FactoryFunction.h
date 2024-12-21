@@ -8,16 +8,15 @@
 #include <string>
 
 #include "Function.h"
-#include "Spreadsheet.h"
-#include "CellRange.h"
-#include "Sum.h"
-#include "Max.h"
-#include "Min.h"
-#include "Mean.h"
+#include "Model.h"
 
 class FactoryFunction {
 public:
-    Function *createFunction(Spreadsheet *s, const std::string &codeFunction, const CellRange &range);
+    enum class CodeFunction { Sum, Max, Min, Mean };
+
+    Function *createFunction(Model *model, CodeFunction code, const QModelIndex &index, QModelIndexList &indexes, const std::string &formula);
+
+    CodeFunction codeFromString(const std::string &code);
 };
 
 #endif //FACTORYFUNCTION_H

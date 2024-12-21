@@ -4,13 +4,15 @@
 
 #include "Min.h"
 
-Min::Min(Spreadsheet *s, const CellRange &r) : range(r), subject(s) {
-    subject->addObserver(this);
-}
-
-Min::~Min() {
-    subject->removeObserver(this);
+Min::Min(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula) : Function(
+    model, index, indexes, formula) {
 }
 
 void Min::compute() {
+    QModelIndex min = indexes[0];
+    for (const auto &index : indexes) {
+        if (subject->itemFromIndex(index)->text().toDouble() < subject->itemFromIndex(min)->text().toDouble())
+            min = index;
+    }
+    subject->itemFromIndex(index)->setText(subject->itemFromIndex(min)->text());
 }

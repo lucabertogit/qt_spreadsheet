@@ -4,20 +4,14 @@
 
 #include "Sum.h"
 
-Sum::Sum(Spreadsheet *s, const CellRange &r) : range(r), subject(s), item(s->getTable().currentItem()) {
-    subject->addObserver(this);
-}
-
-Sum::~Sum() {
-    subject->removeObserver(this);
+Sum::Sum(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula) : Function(
+    model, index, indexes, formula) {
 }
 
 void Sum::compute() {
     double sum = 0;
-    for (int col = range.getStartColumn(); col <= range.getEndColumn(); col++) {
-        for (int row = range.getStartRow(); row <= range.getEndRow(); row++) {
-            sum += subject->getTable().item(row, col)->text().toDouble();
-        }
+    for (const auto &index: indexes) {
+        sum += subject->itemFromIndex(index)->text().toDouble();
     }
-    item->setText(QString::number(sum));
+    subject->itemFromIndex(index)->setText(QString::number(sum));
 }
