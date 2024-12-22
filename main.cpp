@@ -5,8 +5,6 @@
 #include "src/Controller.h"
 
 // TODO: migliorare gestione eccezioni anche creandone alcune specifiche
-// TODO: il controller non deve impostare la view, ev. la view puo' richiamare direttamente il model
-// TODO: cambiare nome variabile indexes in range
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
 

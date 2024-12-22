@@ -33,7 +33,7 @@ void Controller::execute(const QModelIndex &index, QWidget *editor) const {
     }
 }
 
-QModelIndexList Controller::setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const {
+QModelIndexList Controller::setRange(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const {
     QModelIndexList result;
     for (int row = rowStart; row <= rowEnd; ++row) {
         for (int col = columnToInt(columnStart); col <= columnToInt(columnEnd); ++col) {
@@ -65,22 +65,20 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
         columnEnd = matches[4].str()[0];
         rowEnd = std::stoi(matches[5].str()) - 1;
     } else {
-        // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     }
     
     if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
-        // TODO: individuare eventuale errore piu' appropriato
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     
-    QModelIndexList indexes = setIndexes(columnStart, columnEnd, rowStart, rowEnd, index);
+    QModelIndexList range = setRange(columnStart, columnEnd, rowStart, rowEnd, index);
 
     FactoryFunction::CodeFunction code = factory.codeFromString(function);
 
     sortAndSwap<char>(columnStart, columnEnd);
     sortAndSwap<int>(rowStart, rowEnd);
 
-    factory.createFunction(model, code, index, indexes, formula);
+    factory.createFunction(model, code, index, range, formula);
 }
 
 int Controller::columnToInt(char column) const {
@@ -108,10 +106,10 @@ void Controller::deleteAllFunction() const {
     }
 }
 
-void Controller::printExtendedFormula(const QModelIndex &index, QWidget *editor) const {
+QString Controller::printExtendedFormula(const QModelIndex &index) const {
+    QString result;
     Function *function = dynamic_cast<Function *>(model->getObserver(index));
-    if (function) {
-        auto *editorCell = qobject_cast<QLineEdit *>(editor);
-        editorCell->setText(QString::fromStdString(function->getExtendedFormula()));
-    }
+    if (function)
+        result = QString::fromStdString(function->getExtendedFormula());
+    return result;
 }

@@ -5,8 +5,8 @@
 #include <iostream>
 #include "Function.h"
 
-Function::Function(Model *model, const QModelIndex &index, const QModelIndexList &indexes,
-                   const std::string &formula) : index(index), indexes(indexes), extendedFormula(formula),
+Function::Function(Model *model, const QModelIndex &index, const QModelIndexList &range,
+                   const std::string &formula) : index(index), range(range), extendedFormula(formula),
                                                  subject(model) {
     std::cout << "Add Function -> " << this->extendedFormula << std::endl;
     subject->addObserver(this);

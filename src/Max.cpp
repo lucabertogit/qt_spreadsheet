@@ -4,13 +4,13 @@
 
 #include "Max.h"
 
-Max::Max(Model *model, const QModelIndex &index, const QModelIndexList &indexes, const std::string &formula) : Function(
-    model, index, indexes, formula) {
+Max::Max(Model *model, const QModelIndex &index, const QModelIndexList &range, const std::string &formula) : Function(
+    model, index, range, formula) {
 }
 
 void Max::compute() {
-    QModelIndex max = indexes[0];
-    for (const auto &index : indexes) {
+    QModelIndex max = range[0];
+    for (const auto &index : range) {
         if (subject->itemFromIndex(index)->text().toDouble() > subject->itemFromIndex(max)->text().toDouble())
             max = index;
     }

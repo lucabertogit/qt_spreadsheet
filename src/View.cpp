@@ -19,7 +19,12 @@ void View::quit() {
 bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) {
     bool result = QTableView::edit(index, trigger, event);
     if (result) {
-        controller->printExtendedFormula(index, indexWidget(index));;
+        QLineEdit *editor = qobject_cast<QLineEdit *>(indexWidget(index));
+        QString formula = controller->printExtendedFormula(index);
+        if (!formula.isEmpty() && editor) {
+            editor->setText(formula);
+            editor->selectAll();
+        }
     }
     return result;
 }

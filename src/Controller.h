@@ -15,7 +15,7 @@ public:
 
     void execute(const QModelIndex &index, QWidget *editor) const;
 
-    QModelIndexList setIndexes(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const;
+    QModelIndexList setRange(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const;
 
     void createFunction(const QModelIndex &index, const QString &newItemText) const;
 
@@ -28,7 +28,7 @@ public:
 
     void deleteAllFunction() const;
 
-    void printExtendedFormula(const QModelIndex &index, QWidget *editor) const;
+    QString printExtendedFormula(const QModelIndex &index) const;
 
 private:
     Model *model;
