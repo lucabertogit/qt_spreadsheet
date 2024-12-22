@@ -106,10 +106,10 @@ void Controller::deleteAllFunction() const {
     }
 }
 
-void Controller::printExtendedFormula(const QModelIndex &index, QWidget *editor) const {
+QString Controller::printExtendedFormula(const QModelIndex &index) const {
+    QString result;
     Function *function = dynamic_cast<Function *>(model->getObserver(index));
-    if (function) {
-        auto *editorCell = qobject_cast<QLineEdit *>(editor);
-        editorCell->setText(QString::fromStdString(function->getExtendedFormula()));
-    }
+    if (function)
+        result = QString::fromStdString(function->getExtendedFormula());
+    return result;
 }
