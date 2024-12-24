@@ -12,10 +12,6 @@ View::View(Model *m, Controller *c, QWidget *parent) : QTableView(parent), model
     setCurrentIndex(model->indexFromItem(model->item(0, 0)));
 }
 
-void View::quit() {
-    controller->deleteAllFunction();
-}
-
 bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) {
     bool result = QTableView::edit(index, trigger, event);
     if (result) {

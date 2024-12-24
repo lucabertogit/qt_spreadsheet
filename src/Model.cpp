@@ -17,6 +17,13 @@ Model::Model(QObject *parent) : QStandardItemModel(10, 10, parent) {
     connect(this, &QStandardItemModel::itemChanged, this, &Model::onItemChanged);
 }
 
+Model::~Model() {
+    while (!observers.empty()) {
+        Observer *observer = observers.front();
+        delete observer;
+    }
+}
+
 void Model::addObserver(Observer *o) {
     observers.push_back(o);
 }
@@ -28,14 +35,6 @@ void Model::removeObserver(Observer *o) {
 void Model::notify() {
     for (const auto observer: observers)
         observer->update();
-}
-
-int Model::countObserver() const {
-    return observers.size();
-}
-
-Observer *Model::getObserver() {
-    return observers.front();
 }
 
 Observer *Model::getObserver(const QModelIndex &index) {

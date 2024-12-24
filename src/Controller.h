@@ -26,8 +26,6 @@ public:
 
     void deleteFunction(const QModelIndex &index) const;
 
-    void deleteAllFunction() const;
-
     QString printExtendedFormula(const QModelIndex &index) const;
 
 private:
