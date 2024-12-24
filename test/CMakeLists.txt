@@ -10,6 +10,7 @@ file(GLOB TEST_SOURCES runAllTests.cpp
         FactoryFunctionTest.cpp
         ModelTest.cpp
         FunctionFixture.cpp
+        MVCFixture.cpp
 )
 
 set(PROJECT_SOURCES ../src/FactoryFunction.cpp
