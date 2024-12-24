@@ -63,9 +63,6 @@ protected:
         item = new QStandardItem(QString("=SUM(A1:B3)"));
         model->setItem(3, 3, item);
         sum = new Sum(model, sumIndex, range, "=SUM(A1:B3)");
-
-        trueIndex = model->index(3, 0);
-        falseIndex = model->index(4, 2);
     }
 
     void TearDown() override {
@@ -85,8 +82,6 @@ protected:
     Mean *mean;
     Min *min;
     Sum *sum;
-    QModelIndex trueIndex;
-    QModelIndex falseIndex;
 };
 
 TEST_F(FunctionSuite, TestMaxFunction) {
@@ -94,6 +89,9 @@ TEST_F(FunctionSuite, TestMaxFunction) {
     ASSERT_EQ(max->getExtendedFormula(), "=MAX(A1:B3)");
     ASSERT_EQ(max->getIndex().row(), 3);
     ASSERT_EQ(max->getIndex().column(), 0);
+
+    QModelIndex trueIndex = model->index(3, 0);
+    QModelIndex falseIndex = model->index(4, 2);
     ASSERT_TRUE(max->thereIsFunction(trueIndex));
     ASSERT_FALSE(max->thereIsFunction(falseIndex));
 
@@ -101,41 +99,47 @@ TEST_F(FunctionSuite, TestMaxFunction) {
     ASSERT_EQ(model->item(3, 0)->text(), QString::number(87));
 }
 
-// TODO: modificare riferimenti
 TEST_F(FunctionSuite, TestMeanFunction) {
     ASSERT_EQ(model->countObserver(), 4);
-    ASSERT_EQ(max->getExtendedFormula(), "=MAX(A1:B3)");
-    ASSERT_EQ(max->getIndex().row(), 3);
-    ASSERT_EQ(max->getIndex().column(), 0);
-    ASSERT_TRUE(max->thereIsFunction(trueIndex));
-    ASSERT_FALSE(max->thereIsFunction(falseIndex));
+    ASSERT_EQ(mean->getExtendedFormula(), "=MEAN(A1:B3)");
+    ASSERT_EQ(mean->getIndex().row(), 3);
+    ASSERT_EQ(mean->getIndex().column(), 1);
 
-    max->compute();
-    ASSERT_EQ(model->item(3, 0)->text(), QString::number(87));
+    QModelIndex trueIndex = model->index(3, 1);
+    QModelIndex falseIndex = model->index(4, 2);
+    ASSERT_TRUE(mean->thereIsFunction(trueIndex));
+    ASSERT_FALSE(mean->thereIsFunction(falseIndex));
+
+    mean->compute();
+    ASSERT_EQ(model->item(3, 1)->text(), QString::number(49));
 }
 
-// TODO: modificare riferimenti
 TEST_F(FunctionSuite, TestMinFunction) {
     ASSERT_EQ(model->countObserver(), 4);
-    ASSERT_EQ(max->getExtendedFormula(), "=MAX(A1:B3)");
-    ASSERT_EQ(max->getIndex().row(), 3);
-    ASSERT_EQ(max->getIndex().column(), 0);
-    ASSERT_TRUE(max->thereIsFunction(trueIndex));
-    ASSERT_FALSE(max->thereIsFunction(falseIndex));
+    ASSERT_EQ(min->getExtendedFormula(), "=MIN(A1:B3)");
+    ASSERT_EQ(min->getIndex().row(), 3);
+    ASSERT_EQ(min->getIndex().column(), 2);
 
-    max->compute();
-    ASSERT_EQ(model->item(3, 0)->text(), QString::number(87));
+    QModelIndex trueIndex = model->index(3, 2);
+    QModelIndex falseIndex = model->index(4, 2);
+    ASSERT_TRUE(min->thereIsFunction(trueIndex));
+    ASSERT_FALSE(min->thereIsFunction(falseIndex));
+
+    min->compute();
+    ASSERT_EQ(model->item(3, 2)->text(), QString::number(12));
 }
 
-// TODO: modificare riferimenti
 TEST_F(FunctionSuite, TestSumFunction) {
     ASSERT_EQ(model->countObserver(), 4);
-    ASSERT_EQ(max->getExtendedFormula(), "=MAX(A1:B3)");
-    ASSERT_EQ(max->getIndex().row(), 3);
-    ASSERT_EQ(max->getIndex().column(), 0);
-    ASSERT_TRUE(max->thereIsFunction(trueIndex));
-    ASSERT_FALSE(max->thereIsFunction(falseIndex));
+    ASSERT_EQ(sum->getExtendedFormula(), "=SUM(A1:B3)");
+    ASSERT_EQ(sum->getIndex().row(), 3);
+    ASSERT_EQ(sum->getIndex().column(), 3);
 
-    max->compute();
-    ASSERT_EQ(model->item(3, 0)->text(), QString::number(87));
+    QModelIndex trueIndex = model->index(3, 3);
+    QModelIndex falseIndex = model->index(4, 2);
+    ASSERT_TRUE(sum->thereIsFunction(trueIndex));
+    ASSERT_FALSE(sum->thereIsFunction(falseIndex));
+
+    sum->compute();
+    ASSERT_EQ(model->item(3, 3)->text(), QString::number(294));
 }
