@@ -181,6 +181,8 @@ TEST_F(MVCSuite, TestGUI) {
     ASSERT_EQ(model->item(4, 3)->text(), QString::number(347));
 
     // modifica valore cella dentro formula con valore string
+    currIndex = model->index(1, 1);
+    view->setCurrentIndex(currIndex);
     item = model->item(1, 1);
     editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
     editor->setText("string");
@@ -193,4 +195,41 @@ TEST_F(MVCSuite, TestGUI) {
     ASSERT_EQ(model->item(4, 3)->text(), QString::number(345));
 
     // modifica formula
+    currIndex = model->index(4, 3);
+    view->setCurrentIndex(currIndex);
+    item = model->item(4, 3);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    editor->setText("=MEAN(A1:B1)");
+    controller->execute(currIndex, editor);
+    item->setText("=MEAN(A1:B1)");
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(84));
+    ASSERT_EQ(model->item(4, 1)->text(), QString::number(49.285714286));
+    ASSERT_EQ(model->item(4, 2)->text(), QString::number(12));
+    ASSERT_EQ(model->item(4, 3)->text(), QString::number(56));
+
+    // modificare formula con valore
+    currIndex = model->index(4, 3);
+    view->setCurrentIndex(currIndex);
+    item = model->item(4, 3);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    editor->setText("string");
+    controller->execute(currIndex, editor);
+    item->setText("string");
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(84));
+    ASSERT_EQ(model->item(4, 1)->text(), QString::number(49.285714286));
+    ASSERT_EQ(model->item(4, 2)->text(), QString::number(12));
+    ASSERT_EQ(model->item(4, 3)->text(), "string");
+
+    // ripristinare formula
+    currIndex = model->index(4, 3);
+    view->setCurrentIndex(currIndex);
+    item = model->item(4, 3);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    editor->setText("=MEAN(A1:B1)");
+    controller->execute(currIndex, editor);
+    item->setText("=MEAN(A1:B1)");
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(84));
+    ASSERT_EQ(model->item(4, 1)->text(), QString::number(49.285714286));
+    ASSERT_EQ(model->item(4, 2)->text(), QString::number(12));
+    ASSERT_EQ(model->item(4, 3)->text(), QString::number(56));
 }
