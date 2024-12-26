@@ -71,12 +71,12 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     
+    sortAndSwap<char>(columnStart, columnEnd);
+    sortAndSwap<int>(rowStart, rowEnd);
+
     QModelIndexList range = setRange(columnStart, columnEnd, rowStart, rowEnd, index);
 
     FactoryFunction::CodeFunction code = factory.codeFromString(function);
-
-    sortAndSwap<char>(columnStart, columnEnd);
-    sortAndSwap<int>(rowStart, rowEnd);
 
     factory.createFunction(model, code, index, range, formula);
 }
