@@ -9,10 +9,22 @@ Min::Min(Model *model, const QModelIndex &index, const QModelIndexList &range, c
 }
 
 void Min::compute() {
-    QModelIndex min = range[0];
-    for (const auto &index : range) {
-        if (subject->itemFromIndex(index)->text().toDouble() < subject->itemFromIndex(min)->text().toDouble())
-            min = index;
+    QModelIndex min;
+    for (auto index = range.begin(); !min.isValid() && index != range.end(); ++index) {
+        bool converted;
+        double value = subject->itemFromIndex(*index)->text().toDouble(&converted);
+        if (converted)
+            min = *index;
     }
-    subject->itemFromIndex(index)->setText(subject->itemFromIndex(min)->text());
+    if (min.isValid()) {
+        for (const auto &index : range) {
+            bool converted;
+            double value = subject->itemFromIndex(index)->text().toDouble(&converted);
+            if (converted && value < subject->itemFromIndex(min)->text().toDouble())
+                min = index;
+        }
+        subject->itemFromIndex(index)->setText(subject->itemFromIndex(min)->text());
+    } else {
+        subject->itemFromIndex(index)->setText(QString::number(0));
+    }
 }

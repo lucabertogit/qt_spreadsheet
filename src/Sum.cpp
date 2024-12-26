@@ -11,7 +11,10 @@ Sum::Sum(Model *model, const QModelIndex &index, const QModelIndexList &range, c
 void Sum::compute() {
     double sum = 0;
     for (const auto &index: range) {
-        sum += subject->itemFromIndex(index)->text().toDouble();
+        bool converted;
+        double value = subject->itemFromIndex(index)->text().toDouble(&converted);
+        if (converted)
+            sum += value;
     }
     subject->itemFromIndex(index)->setText(QString::number(sum));
 }

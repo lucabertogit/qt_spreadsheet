@@ -9,10 +9,22 @@ Max::Max(Model *model, const QModelIndex &index, const QModelIndexList &range, c
 }
 
 void Max::compute() {
-    QModelIndex max = range[0];
-    for (const auto &index : range) {
-        if (subject->itemFromIndex(index)->text().toDouble() > subject->itemFromIndex(max)->text().toDouble())
-            max = index;
+    QModelIndex max;
+    for (auto index = range.begin(); !max.isValid() && index != range.end(); ++index) {
+        bool converted;
+        double value = subject->itemFromIndex(*index)->text().toDouble(&converted);
+        if (converted)
+            max = *index;
     }
-    subject->itemFromIndex(index)->setText(subject->itemFromIndex(max)->text());
+    if (max.isValid()) {
+        for (const auto &index : range) {
+            bool converted;
+            double value = subject->itemFromIndex(index)->text().toDouble(&converted);
+            if (converted && value > subject->itemFromIndex(max)->text().toDouble())
+                max = index;
+        }
+        subject->itemFromIndex(index)->setText(subject->itemFromIndex(max)->text());
+    } else {
+        subject->itemFromIndex(index)->setText(QString::number(0));
+    }
 }
