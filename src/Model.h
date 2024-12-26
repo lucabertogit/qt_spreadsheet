@@ -14,18 +14,13 @@ class Model : public QStandardItemModel, public Subject {
 public:
     explicit Model(QObject *parent = nullptr);
 
-    // TODO: potrebbe liberare la memoria allocati dagli observer il distruttore?
-    ~Model() override = default;
+    ~Model() override;
 
     void addObserver(Observer *o) override;
 
     void removeObserver(Observer *o) override;
 
     void notify() override;
-
-    int countObserver() const;
-
-    Observer *getObserver();
 
     Observer *getObserver(const QModelIndex &index);
 

@@ -16,8 +16,6 @@ public:
 
     ~View() override = default;
 
-    void quit();
-
 protected:
     bool edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) override;
 

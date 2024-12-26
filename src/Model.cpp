@@ -17,6 +17,13 @@ Model::Model(QObject *parent) : QStandardItemModel(10, 10, parent) {
     connect(this, &QStandardItemModel::itemChanged, this, &Model::onItemChanged);
 }
 
+Model::~Model() {
+    while (!observers.empty()) {
+        Observer *observer = observers.front();
+        delete observer;
+    }
+}
+
 void Model::addObserver(Observer *o) {
     observers.push_back(o);
 }

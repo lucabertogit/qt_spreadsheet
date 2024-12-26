@@ -13,11 +13,6 @@ public:
     explicit MainWindow(View *v, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
 
     ~MainWindow() override;
-
-protected:
-    void closeEvent(QCloseEvent *event) override;
-
-private:
 };
 
 #endif //MAINWINDOW_H

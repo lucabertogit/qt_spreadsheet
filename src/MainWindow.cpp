@@ -12,10 +12,3 @@ MainWindow::MainWindow(View *v, QWidget *parent, Qt::WindowFlags flags) : QMainW
 MainWindow::~MainWindow() {
     takeCentralWidget();
 }
-
-void MainWindow::closeEvent(QCloseEvent *event) {
-    View *view = dynamic_cast<View *>(centralWidget());
-    if (view)
-        view->quit();
-    QMainWindow::closeEvent(event);
-}

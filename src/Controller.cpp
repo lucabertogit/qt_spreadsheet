@@ -99,13 +99,6 @@ void Controller::deleteFunction(const QModelIndex &index) const {
     delete observer;
 }
 
-void Controller::deleteAllFunction() const {
-    while (model->countObserver() > 0) {
-        Observer *observer = model->getObserver();
-        delete observer;;
-    }
-}
-
 QString Controller::printExtendedFormula(const QModelIndex &index) const {
     QString result;
     Function *function = dynamic_cast<Function *>(model->getObserver(index));
