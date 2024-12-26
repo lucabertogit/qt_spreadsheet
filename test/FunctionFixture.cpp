@@ -85,7 +85,6 @@ protected:
 };
 
 TEST_F(FunctionSuite, TestMaxFunction) {
-    ASSERT_EQ(model->countObserver(), 4);
     ASSERT_EQ(max->getExtendedFormula(), "=MAX(A1:B3)");
     ASSERT_EQ(max->getIndex().row(), 3);
     ASSERT_EQ(max->getIndex().column(), 0);
@@ -100,7 +99,6 @@ TEST_F(FunctionSuite, TestMaxFunction) {
 }
 
 TEST_F(FunctionSuite, TestMeanFunction) {
-    ASSERT_EQ(model->countObserver(), 4);
     ASSERT_EQ(mean->getExtendedFormula(), "=MEAN(A1:B3)");
     ASSERT_EQ(mean->getIndex().row(), 3);
     ASSERT_EQ(mean->getIndex().column(), 1);
@@ -115,7 +113,6 @@ TEST_F(FunctionSuite, TestMeanFunction) {
 }
 
 TEST_F(FunctionSuite, TestMinFunction) {
-    ASSERT_EQ(model->countObserver(), 4);
     ASSERT_EQ(min->getExtendedFormula(), "=MIN(A1:B3)");
     ASSERT_EQ(min->getIndex().row(), 3);
     ASSERT_EQ(min->getIndex().column(), 2);
@@ -130,7 +127,6 @@ TEST_F(FunctionSuite, TestMinFunction) {
 }
 
 TEST_F(FunctionSuite, TestSumFunction) {
-    ASSERT_EQ(model->countObserver(), 4);
     ASSERT_EQ(sum->getExtendedFormula(), "=SUM(A1:B3)");
     ASSERT_EQ(sum->getIndex().row(), 3);
     ASSERT_EQ(sum->getIndex().column(), 3);

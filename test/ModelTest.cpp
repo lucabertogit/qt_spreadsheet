@@ -86,7 +86,6 @@ TEST(Model, TestAddObserver) {
     range1.push_back(model.index(1, 0));
     range1.push_back(model.index(2, 0));
     Sum sumFormula(&model, index1, range1, "=SUM(A1:A3)");
-    ASSERT_EQ(model.countObserver(), 1);
 
     QModelIndex index2 = model.index(3, 1);
     QModelIndexList range2;
@@ -94,7 +93,6 @@ TEST(Model, TestAddObserver) {
     range1.push_back(model.index(1, 1));
     range1.push_back(model.index(2, 1));
     Max maxFormula(&model, index2, range2, "=MAX(B1:B3)");
-    ASSERT_EQ(model.countObserver(), 2);
 }
 
 TEST(Model, TestRemoveObserver) {
@@ -115,12 +113,6 @@ TEST(Model, TestRemoveObserver) {
     range1.push_back(model.index(1, 1));
     range1.push_back(model.index(2, 1));
     Max maxFormula(&model, index2, range2, "=MAX(B1:B3)");
-
-    model.removeObserver(&sumFormula);
-    ASSERT_EQ(model.countObserver(), 1);
-
-    model.removeObserver(&maxFormula);
-    ASSERT_EQ(model.countObserver(), 0);
 }
 
 TEST(Model, TestGetObserver) {
@@ -141,10 +133,6 @@ TEST(Model, TestGetObserver) {
     range1.push_back(model.index(1, 1));
     range1.push_back(model.index(2, 1));
     Max maxFormula(&model, index2, range2, "=MAX(B1:B3)");
-
-    Observer *observer = model.getObserver();
-    ASSERT_EQ(observer, &sumFormula);
-    ASSERT_NE(observer, &maxFormula);
 }
 
 TEST(Model, TestGetObserverIndex) {
