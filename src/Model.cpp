@@ -37,14 +37,6 @@ void Model::notify() {
         observer->update();
 }
 
-int Model::countObserver() const {
-    return observers.size();
-}
-
-Observer *Model::getObserver() {
-    return observers.front();
-}
-
 Observer *Model::getObserver(const QModelIndex &index) {
     for (auto observer : observers) {
         Function *function = dynamic_cast<Function *>(observer);
