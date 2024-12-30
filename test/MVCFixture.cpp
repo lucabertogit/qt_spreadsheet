@@ -322,6 +322,254 @@ TEST_F(MVCSuite, TestGUI) {
     ASSERT_TRUE(model->item(4, 3)->text().isEmpty());
 }
 
+TEST_F(MVCSuite, TestInvalidFormula) {
+    ASSERT_EQ(model->item(0, 0)->text(), QString::number(28));
+    ASSERT_EQ(model->item(1, 0)->text(), QString::number(56));
+    ASSERT_EQ(model->item(2, 0)->text(), QString::number(27));
+    ASSERT_EQ(model->item(3, 0)->text(), QString::number(64));
+    ASSERT_EQ(model->item(0, 1)->text(), QString::number(84));
+    ASSERT_EQ(model->item(1, 1)->text(), QString::number(87));
+    ASSERT_EQ(model->item(2, 1)->text(), QString::number(12));
+    ASSERT_EQ(model->item(3, 1)->text(), QString::number(74));
+    QModelIndex currIndex = model->index(0, 0);
+    QLineEdit *editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(28));
+    currIndex = model->index(1, 0);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(56));
+    currIndex = model->index(2, 0);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(27));
+    currIndex = model->index(3, 0);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(64));
+    currIndex = model->index(0, 1);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(84));
+    currIndex = model->index(1, 1);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(87));
+    currIndex = model->index(2, 1);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(12));
+    currIndex = model->index(3, 1);
+    editor = qobject_cast<QLineEdit *>(view->indexWidget(currIndex));
+    ASSERT_EQ(editor->text(), QString::number(74));
+
+    // inserimento formula SUM
+    currIndex = model->index(4, 0);
+    view->setCurrentIndex(currIndex);
+    QStandardItem *item = new QStandardItem;
+    model->setItem(4, 0, item);
+    editor = new QLineEdit;
+    editor->setText("=SUM(A1:B4)");
+    controller->execute(currIndex, editor);
+    item->setText("=SUM(A1:B4)");
+    view->setIndexWidget(currIndex, editor);
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(432));
+
+    // modifica intervallo
+    currIndex = model->index(4, 0);
+    view->setCurrentIndex(currIndex);
+    item = new QStandardItem;
+    model->setItem(4, 0, item);
+    editor = new QLineEdit;
+    editor->setText("=SUM(a1:b4)");
+    controller->execute(currIndex, editor);
+    item->setText("=SUM(a1:b4)");
+    view->setIndexWidget(currIndex, editor);
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(432));
+
+    // modifica intervallo
+    currIndex = model->index(4, 0);
+    view->setCurrentIndex(currIndex);
+    item = new QStandardItem;
+    model->setItem(4, 0, item);
+    editor = new QLineEdit;
+    editor->setText("=SUM(b4:a1)");
+    controller->execute(currIndex, editor);
+    item->setText("=SUM(b4:a1)");
+    view->setIndexWidget(currIndex, editor);
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(432));
+
+    // modifica intervallo
+    currIndex = model->index(4, 0);
+    view->setCurrentIndex(currIndex);
+    item = new QStandardItem;
+    model->setItem(4, 0, item);
+    editor = new QLineEdit;
+    editor->setText("=SUM(B4:A1)");
+    controller->execute(currIndex, editor);
+    item->setText("=SUM(B4:A1)");
+    view->setIndexWidget(currIndex, editor);
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(432));
+
+    // modifica intervallo
+    currIndex = model->index(4, 0);
+    view->setCurrentIndex(currIndex);
+    item = new QStandardItem;
+    model->setItem(4, 0, item);
+    editor = new QLineEdit;
+    editor->setText("=SUM(a1:B4)");
+    controller->execute(currIndex, editor);
+    item->setText("=SUM(a1:B4)");
+    view->setIndexWidget(currIndex, editor);
+    ASSERT_EQ(model->item(4, 0)->text(), QString::number(432));
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM()");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(A1B4)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(A1;B4)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(A1:)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(:B4)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(?1:B4)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(A1:!4)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(A1;B4:C4)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+
+    // modifica intervallo
+    try {
+        currIndex = model->index(4, 0);
+        view->setCurrentIndex(currIndex);
+        item = new QStandardItem;
+        model->setItem(4, 0, item);
+        editor = new QLineEdit;
+        editor->setText("=SUM(A1:B4:C4)");
+        controller->execute(currIndex, editor);
+        view->setIndexWidget(currIndex, editor);
+        FAIL() << "Nessuna eccezione lanciata";
+    } catch (std::invalid_argument &e) {
+        ASSERT_EQ(e.what(), std::string("La stringa non corrisponde al formato atteso"));
+    } catch (...) {
+        FAIL() << "Lanciata altra eccezzione";
+    }
+}
+
 TEST_F(MVCSuiteString, TestFunctionWithValueString) {
     ASSERT_EQ(model->item(0, 0)->text(), "string");
     ASSERT_EQ(model->item(1, 0)->text(), "string");

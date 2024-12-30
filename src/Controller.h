@@ -22,7 +22,7 @@ public:
     int columnToInt(char column) const;
 
     template <typename T>
-    void sortAndSwap(T start, T end) const;
+    void sortAndSwap(T &start, T &end) const;
 
     void deleteFunction(const QModelIndex &index) const;
 

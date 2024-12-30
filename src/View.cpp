@@ -27,6 +27,11 @@ bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger
 
 void View::commitData(QWidget *editor) {
     QModelIndex index = currentIndex();
-    controller->execute(index, editor);
+    try {
+        controller->execute(index, editor);
+    } catch (std::invalid_argument &e) {
+        QLineEdit *editorCell = qobject_cast<QLineEdit *>(editor);
+        editorCell->setText("#NOME?");
+    }
     QTableView::commitData(editor);
 }
