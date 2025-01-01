@@ -52,7 +52,7 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     int rowEnd;
 
 
-    std::regex pattern(R"(^=(SUM|MAX|MIN|MEAN)\(([A-J])(\d+):([A-J])(\d+)\)$)");
+    std::regex pattern(R"(^=(SUM|MAX|MIN|MEAN)\(+([A-J])(\d+):([A-J])(\d+)\)+$)");
     std::smatch matches;
     if (std::regex_match(formula, matches, pattern)) {
         function = matches[1];
