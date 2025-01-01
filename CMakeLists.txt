@@ -41,3 +41,4 @@ add_executable(qt_spreadsheet main.cpp ${SOURCES} ${HEADERS})
 target_link_libraries(qt_spreadsheet Qt6::Gui Qt6::Widgets)
 
 add_subdirectory(test)
+add_subdirectory(test_qt)
