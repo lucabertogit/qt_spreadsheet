@@ -8,8 +8,33 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Test Widgets)
 
 qt_standard_project_setup()
 
+set(PROJECT_SOURCES ../src/FactoryFunction.cpp
+        ../src/FactoryFunction.h
+        ../src/Function.cpp
+        ../src/Function.h
+        ../src/Max.cpp
+        ../src/Max.h
+        ../src/Mean.cpp
+        ../src/Mean.h
+        ../src/Min.cpp
+        ../src/Min.h
+        ../src/Observer.h
+        ../src/Subject.h
+        ../src/Sum.cpp
+        ../src/Sum.h
+        ../src/Controller.h
+        ../src/Controller.cpp
+        ../src/View.h
+        ../src/View.cpp
+        ../src/Model.h
+        ../src/Model.cpp
+        ../src/MainWindow.h
+        ../src/MainWindow.cpp
+)
+
 qt_add_executable(runQtSpreadsheetGuiTests
         TestGui.cpp
+        ${PROJECT_SOURCES}
 )
 
 target_link_libraries(runQtSpreadsheetGuiTests PRIVATE
