@@ -13,9 +13,17 @@ void Mean::compute() {
     double sum = 0;
     int countElement = 0;
     for (const auto &index: range) {
-        countElement++;
-        sum += subject->itemFromIndex(index)->text().toDouble();
+        bool converted;
+        double value = subject->itemFromIndex(index)->text().toDouble(&converted);
+        if (converted) {
+            countElement++;
+            sum += value;
+        }
     }
-    double mean = sum / countElement;
-    subject->itemFromIndex(index)->setText(QString::number(mean));
+    if (countElement) {
+        double mean = sum / countElement;
+        subject->itemFromIndex(index)->setText(QString::number(mean));
+    } else {
+        subject->itemFromIndex(index)->setText("#DIV/0!");
+    }
 }

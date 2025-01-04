@@ -24,13 +24,9 @@ void Controller::execute(const QModelIndex &index, QWidget *editor) const {
     
     if (oldItemText.length() > 0 && oldItemText[0] == '=')
         deleteFunction(index);
-    
-    try {
-        if (newItemText.length() > 0 && newItemText[0] == '=')
-            createFunction(index, newItemText);
-    } catch (std::invalid_argument &e) {
-        model->itemFromIndex(index)->setText("#NOME?");
-    }
+
+    if (newItemText.length() > 0 && newItemText[0] == '=')
+        createFunction(index, newItemText);
 }
 
 QModelIndexList Controller::setRange(char columnStart, char columnEnd, int rowStart, int rowEnd, const QModelIndex &index) const {
@@ -56,7 +52,7 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     int rowEnd;
 
 
-    std::regex pattern(R"(^=(SUM|MAX|MIN|MEAN)\(([A-J])(\d+):([A-J])(\d+)\)$)");
+    std::regex pattern(R"(^=(SUM|MAX|MIN|MEAN)\(+([A-J])(\d+):([A-J])(\d+)\)+$)");
     std::smatch matches;
     if (std::regex_match(formula, matches, pattern)) {
         function = matches[1];
@@ -67,16 +63,16 @@ void Controller::createFunction(const QModelIndex &index, const QString &newItem
     } else {
         throw std::invalid_argument("La stringa non corrisponde al formato atteso");
     }
-    
-    if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
-        throw std::invalid_argument("La stringa non corrisponde al formato atteso");
-    
-    QModelIndexList range = setRange(columnStart, columnEnd, rowStart, rowEnd, index);
-
-    FactoryFunction::CodeFunction code = factory.codeFromString(function);
 
     sortAndSwap<char>(columnStart, columnEnd);
     sortAndSwap<int>(rowStart, rowEnd);
+
+    if (rowStart >= model->rowCount() || rowEnd >= model->rowCount())
+        throw std::invalid_argument("La stringa non corrisponde al formato atteso");
+
+    QModelIndexList range = setRange(columnStart, columnEnd, rowStart, rowEnd, index);
+
+    FactoryFunction::CodeFunction code = factory.codeFromString(function);
 
     factory.createFunction(model, code, index, range, formula);
 }
@@ -86,7 +82,7 @@ int Controller::columnToInt(char column) const {
 }
 
 template<typename T>
-void Controller::sortAndSwap(T start, T end) const {
+void Controller::sortAndSwap(T &start, T &end) const {
     if (start > end) {
         T tmp = start;
         start = end;

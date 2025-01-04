@@ -9,7 +9,7 @@
 View::View(Model *m, Controller *c, QWidget *parent) : QTableView(parent), model(m), controller(c) {
     QTableView::setModel(model);
     setSizeAdjustPolicy(QTableWidget::AdjustToContents);
-    setCurrentIndex(model->indexFromItem(model->item(0, 0)));
+    setCurrentIndex(model->index(0, 0));
 }
 
 bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event) {
@@ -27,6 +27,11 @@ bool View::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger
 
 void View::commitData(QWidget *editor) {
     QModelIndex index = currentIndex();
-    controller->execute(index, editor);
+    try {
+        controller->execute(index, editor);
+    } catch (std::invalid_argument &e) {
+        QLineEdit *editorCell = qobject_cast<QLineEdit *>(editor);
+        editorCell->setText("#NOME?");
+    }
     QTableView::commitData(editor);
 }
